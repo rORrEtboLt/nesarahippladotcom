@@ -19,7 +19,7 @@ const init = async () => {
     path: '/{param*}',
     handler: {
       directory: {
-        path: Path.join(process.cwd(), '../client/build'),
+        path: Path.join(process.cwd(), '../build'),
         index: ['index.html']
       }
     }
