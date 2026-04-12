@@ -61,30 +61,44 @@ Everything a visitor sees is driven by a handful of small files:
 - The flat fallback renders the full blog and projects content as plain HTML
   so search engines and screen readers stay happy.
 
-## Deployment — GitHub Pages
+## Deployment — GitHub Pages (serve from `master/docs`)
 
-Every push / merge to `master` is automatically built and deployed by the
-workflow at `.github/workflows/deploy-pages.yml` using the official
-`actions/deploy-pages` action.
+The built site lives in the `docs/` folder and is served directly by
+GitHub Pages. No CI required.
 
-One-time setup in your repo settings:
+### First-time Pages setup
 
-1. **Settings → Pages → Build and deployment → Source:** select
-   **GitHub Actions**.
-2. (Optional) **Settings → Pages → Custom domain:** set your domain (e.g.
-   `nesarahippla.com`) and add a `public/CNAME` file containing the same
-   domain so it survives every build.
+1. **Settings → Pages → Build and deployment → Source:** choose
+   **Deploy from a branch**.
+2. **Branch:** `master` · **Folder:** `/docs` · **Save**.
+3. (Optional) Set a custom domain and add `public/CNAME` with the same
+   domain so it survives future builds.
 
-How SPA routing is handled:
+### Every time you want to publish a change
 
-- The workflow copies `build/index.html` to `build/404.html`, so any deep
-  link (e.g. `/flat`) served by GitHub Pages falls back to the app and
-  React Router renders the right screen.
-- `package.json` has `"homepage": "."` so asset paths are relative, which
-  works for both custom-domain and project-page (`<user>.github.io/<repo>`)
-  hosting.
-- `App.js` derives the router `basename` from `PUBLIC_URL` at runtime, so
-  links stay correct under a subdirectory deploy.
+```bash
+# edit src/ (or edit docs/*.html and docs/**/*.css directly for quick tweaks)
+npm run build:static   # rebuilds ./docs from source, prettifies HTML + CSS
+git add docs
+git commit -m "Publish update"
+git push               # GitHub Pages picks it up in a minute or two
+```
 
-Other static hosts (Vercel, Netlify, Cloudflare Pages) also work after
-`npm run build`.
+### What's editable by hand inside `docs/`
+
+- `docs/index.html` — prettified, safe to edit directly.
+- `docs/static/css/*.css` — prettified, safe to restyle.
+- Any image / font under `docs/static/media/`.
+
+### What is **not** editable by hand
+
+- `docs/static/js/*.js` — bundled React + Three.js; regenerated every
+  build. For code or content changes (blog posts, projects, profile,
+  3D scene), edit the corresponding file in `src/` and re-run
+  `npm run build:static`. That will overwrite hand edits inside `docs/`.
+
+SPA deep links (e.g. `/flat`) work because `homepage` is `"."` in
+`package.json` and the router derives its `basename` from `PUBLIC_URL`.
+
+Other static hosts (Vercel, Netlify, Cloudflare Pages) also work — point
+them at `docs/` or run `npm run build` and publish `build/`.
