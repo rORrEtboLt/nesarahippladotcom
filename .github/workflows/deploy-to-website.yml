@@ -1,0 +1,86 @@
+name: Build and publish to website repo
+
+on:
+  # Every merge/push to master publishes the site.
+  push:
+    branches: [master]
+  # Manual re-runs from the Actions tab.
+  workflow_dispatch:
+
+# Only one publish at a time; queue any newer runs.
+concurrency:
+  group: publish-website
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Build and push to rORrEtboLt/website
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static site into docs/
+        run: npm run build:static
+        env:
+          CI: 'false' # eslint warnings shouldn't fail the build
+
+      - name: Checkout target website repo
+        uses: actions/checkout@v4
+        with:
+          repository: rORrEtboLt/website
+          ref: master
+          token: ${{ secrets.WEBSITE_DEPLOY_TOKEN }}
+          path: website-repo
+          persist-credentials: true
+
+      - name: Sync build output into website repo
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Preserve CNAME (and anything you list here) across deploys.
+          mkdir -p /tmp/preserve
+          for keep in CNAME; do
+            if [ -e "website-repo/$keep" ]; then
+              cp -R "website-repo/$keep" "/tmp/preserve/$keep"
+              echo "Preserved $keep"
+            fi
+          done
+
+          # Wipe everything in the website repo except .git, then copy the
+          # freshly built static site into the root.
+          find website-repo -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
+          cp -R docs/. website-repo/
+
+          # Restore preserved files.
+          for keep in CNAME; do
+            if [ -e "/tmp/preserve/$keep" ]; then
+              cp -R "/tmp/preserve/$keep" "website-repo/$keep"
+              echo "Restored $keep"
+            fi
+          done
+
+      - name: Commit and push to website repo
+        shell: bash
+        working-directory: website-repo
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to publish."
+            exit 0
+          fi
+          SHORT_SHA="${GITHUB_SHA:0:7}"
+          git commit -m "Publish from nesarahippladotcom@${SHORT_SHA}"
+          git push origin master
