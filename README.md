@@ -61,30 +61,52 @@ Everything a visitor sees is driven by a handful of small files:
 - The flat fallback renders the full blog and projects content as plain HTML
   so search engines and screen readers stay happy.
 
-## Deployment — GitHub Pages
+## Deployment
 
-Every push / merge to `master` is automatically built and deployed by the
-workflow at `.github/workflows/deploy-pages.yml` using the official
-`actions/deploy-pages` action.
+This repo is the **private source of truth**. Published output lives in
+the public repo **`rORrEtboLt/website`**, which GitHub Pages serves at
+**nesarahippla.com**.
 
-One-time setup in your repo settings:
+On every push to `master` here, the workflow
+`.github/workflows/deploy-to-website.yml`:
 
-1. **Settings → Pages → Build and deployment → Source:** select
-   **GitHub Actions**.
-2. (Optional) **Settings → Pages → Custom domain:** set your domain (e.g.
-   `nesarahippla.com`) and add a `public/CNAME` file containing the same
-   domain so it survives every build.
+1. Installs deps and runs `npm run build:static`.
+   - Builds via `react-scripts build`.
+   - Copies output into `docs/`.
+   - Strips sourcemaps.
+   - Runs Prettier over all HTML + CSS so the published files are
+     human-readable and hand-editable.
+2. Checks out `rORrEtboLt/website` using a PAT secret.
+3. Backs up `CNAME`, wipes the repo (except `.git`), copies `docs/` in,
+   restores `CNAME`.
+4. Commits and pushes to `rORrEtboLt/website@master`.
 
-How SPA routing is handled:
+### One-time setup
 
-- The workflow copies `build/index.html` to `build/404.html`, so any deep
-  link (e.g. `/flat`) served by GitHub Pages falls back to the app and
-  React Router renders the right screen.
-- `package.json` has `"homepage": "."` so asset paths are relative, which
-  works for both custom-domain and project-page (`<user>.github.io/<repo>`)
-  hosting.
-- `App.js` derives the router `basename` from `PUBLIC_URL` at runtime, so
-  links stay correct under a subdirectory deploy.
+1. Create a **fine-grained personal access token** (or classic PAT) with
+   `Contents: read/write` permission on `rORrEtboLt/website`.
+2. In this repo, go to **Settings → Secrets and variables → Actions**
+   and add a new secret named `WEBSITE_DEPLOY_TOKEN` with that token's
+   value.
+3. Confirm `rORrEtboLt/website` has `CNAME` at its root containing
+   `nesarahippla.com` (the workflow preserves it across deploys).
+4. In the `website` repo, **Settings → Pages → Source:**
+   *Deploy from a branch* → `master` → `/` (root).
 
-Other static hosts (Vercel, Netlify, Cloudflare Pages) also work after
-`npm run build`.
+### Running the build locally
+
+```bash
+npm run build:static   # generates ./docs, gitignored locally
+```
+
+You can inspect `docs/index.html`, `docs/static/css/main.*.css`, etc.
+directly and tweak them. Local edits to `docs/` are not pushed — the CI
+always rebuilds from `src/` on master.
+
+### Notes
+
+- `package.json` has `"homepage": "."` so asset paths are relative.
+- `App.js` derives the React Router `basename` from `PUBLIC_URL` at
+  runtime, keeping deep links working under a subpath if needed.
+- Other static hosts (Vercel, Netlify, Cloudflare Pages) also work if
+  you point them at `npm run build` → `build/`.
