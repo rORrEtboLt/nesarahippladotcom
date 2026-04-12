@@ -1,70 +1,67 @@
-# Getting Started with Create React App
+# nesarahippla.com
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An interactive 3D portfolio, blog, and open-source playground built with
+**React Three Fiber**. Instead of flat pages, visitors explore a small
+floating-island scene and click objects to reveal themed content panels.
 
-## Available Scripts
+| Object      | Section       |
+| ----------- | ------------- |
+| Monitor     | About         |
+| Notebook    | Blog          |
+| Bookshelf   | Projects      |
+| Coffee mug  | Support me    |
+| Mailbox     | Contact form  |
 
-In the project directory, you can run:
+A flat, accessible version is always available at `/flat` and is used
+automatically for visitors with `prefers-reduced-motion`.
 
-### `npm start`
+## Getting started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+npm install
+npm start          # dev server on http://localhost:3006
+npm run build      # production build
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Editing content
 
-### `npm test`
+Everything a visitor sees is driven by a handful of small files:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- `src/content/profile.json` — name, bio, email, social links, and support
+  URLs (Buy Me a Coffee, Patreon, GitHub Sponsors). Leave a URL ending in `/`
+  to hide its button until you fill it in.
+- `src/content/projects.json` — hand-picked list of projects shown on the
+  shelf. Set `githubUsername` in `profile.json` to automatically pull your
+  pinned repos from GitHub (falls back to this list on failure).
+- `src/content/posts.js` — blog posts authored inline as markdown strings.
+  Each entry needs `slug`, `title`, `date`, `excerpt`, `tags`, and `content`.
+  Posts are sorted newest-first automatically.
 
-### `npm run build`
+## Tech
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **react**, **react-router-dom** — shell + routing
+- **three**, **@react-three/fiber**, **@react-three/drei**,
+  **@react-three/postprocessing** — 3D scene, helpers, bloom/vignette
+- **zustand** — scene state (active hotspot, day/night)
+- **framer-motion** — panel and loading screen transitions
+- **react-markdown** + **remark-gfm** + **rehype-highlight** — blog rendering
+- **react-helmet-async** — per-page titles / OG tags
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Scene tips
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Press `1`–`5` to jump between hotspots, `Esc` to return.
+- Click the sun/moon in the top right to toggle day / night mood.
+- The hamburger icon jumps to the flat accessible version.
 
-### `npm run eject`
+## Accessibility
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- `prefers-reduced-motion` visitors are redirected to `/flat`.
+- All interactive meshes have oversized invisible hit-boxes so small objects
+  remain clickable.
+- The flat fallback renders the full blog and projects content as plain HTML
+  so search engines and screen readers stay happy.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Deployment
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This is a Create React App project; any static host (Vercel, Netlify, GitHub
+Pages, Cloudflare Pages) works after `npm run build`.

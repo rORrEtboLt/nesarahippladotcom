@@ -1,0 +1,19 @@
+{
+  "name": "Nesara Hippla",
+  "tagline": "Software engineer, maker, and open-source enthusiast.",
+  "bio": "Hi! I build thoughtful software, explore creative tech, and write about what I learn along the way. This little 3D world is my corner of the internet — feel free to look around.",
+  "location": "The Internet",
+  "email": "hello@nesarahippla.com",
+  "socials": {
+    "github": "https://github.com/",
+    "twitter": "https://twitter.com/",
+    "linkedin": "https://linkedin.com/",
+    "mastodon": "https://mastodon.social/"
+  },
+  "support": {
+    "buyMeACoffee": "https://www.buymeacoffee.com/",
+    "patreon": "https://www.patreon.com/",
+    "githubSponsors": "https://github.com/sponsors/"
+  },
+  "githubUsername": ""
+}

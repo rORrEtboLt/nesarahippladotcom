@@ -1,0 +1,34 @@
+[
+  {
+    "name": "interactive-3d-portfolio",
+    "description": "This very website — a game-like 3D portfolio built with React Three Fiber.",
+    "url": "https://github.com/",
+    "stars": 0,
+    "language": "JavaScript",
+    "tags": ["three.js", "react", "portfolio"]
+  },
+  {
+    "name": "daily-notes",
+    "description": "A tiny markdown journal that syncs to your favorite cloud, with offline-first caching.",
+    "url": "https://github.com/",
+    "stars": 0,
+    "language": "TypeScript",
+    "tags": ["productivity", "markdown"]
+  },
+  {
+    "name": "pixel-weather",
+    "description": "A whimsical weather CLI that paints your terminal in pixel art based on the forecast.",
+    "url": "https://github.com/",
+    "stars": 0,
+    "language": "Rust",
+    "tags": ["cli", "weather"]
+  },
+  {
+    "name": "lo-fi-focus",
+    "description": "Pomodoro timer with generative lo-fi beats and ambient soundscapes.",
+    "url": "https://github.com/",
+    "stars": 0,
+    "language": "TypeScript",
+    "tags": ["audio", "focus"]
+  }
+]
