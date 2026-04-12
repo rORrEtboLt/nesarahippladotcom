@@ -61,7 +61,30 @@ Everything a visitor sees is driven by a handful of small files:
 - The flat fallback renders the full blog and projects content as plain HTML
   so search engines and screen readers stay happy.
 
-## Deployment
+## Deployment — GitHub Pages
 
-This is a Create React App project; any static host (Vercel, Netlify, GitHub
-Pages, Cloudflare Pages) works after `npm run build`.
+Every push / merge to `master` is automatically built and deployed by the
+workflow at `.github/workflows/deploy-pages.yml` using the official
+`actions/deploy-pages` action.
+
+One-time setup in your repo settings:
+
+1. **Settings → Pages → Build and deployment → Source:** select
+   **GitHub Actions**.
+2. (Optional) **Settings → Pages → Custom domain:** set your domain (e.g.
+   `nesarahippla.com`) and add a `public/CNAME` file containing the same
+   domain so it survives every build.
+
+How SPA routing is handled:
+
+- The workflow copies `build/index.html` to `build/404.html`, so any deep
+  link (e.g. `/flat`) served by GitHub Pages falls back to the app and
+  React Router renders the right screen.
+- `package.json` has `"homepage": "."` so asset paths are relative, which
+  works for both custom-domain and project-page (`<user>.github.io/<repo>`)
+  hosting.
+- `App.js` derives the router `basename` from `PUBLIC_URL` at runtime, so
+  links stay correct under a subdirectory deploy.
+
+Other static hosts (Vercel, Netlify, Cloudflare Pages) also work after
+`npm run build`.

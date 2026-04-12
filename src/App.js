@@ -8,10 +8,22 @@ import 'highlight.js/styles/github-dark.css';
 import Home from './pages/Home';
 import Flat from './pages/Flat';
 
+// Strip trailing slash so basename works when PUBLIC_URL is a full or
+// relative path. Falls back to "/" so local dev keeps working.
+function getBasename() {
+  const url = process.env.PUBLIC_URL || '';
+  try {
+    const path = new URL(url, window.location.origin).pathname.replace(/\/$/, '');
+    return path || '/';
+  } catch {
+    return '/';
+  }
+}
+
 function App() {
   return (
     <HelmetProvider>
-      <Router>
+      <Router basename={getBasename()}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/flat" element={<Flat />} />
