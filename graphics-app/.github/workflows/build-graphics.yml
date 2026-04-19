@@ -1,0 +1,84 @@
+name: Build Design3D
+
+on:
+  push:
+    branches: [claude/3d-graphics-app-cO8Bw, master]
+    paths: ['graphics-app/**']
+  pull_request:
+    paths: ['graphics-app/**']
+
+jobs:
+  build-linux:
+    name: Linux (Ubuntu 22.04)
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install system deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            cmake ninja-build \
+            libgl1-mesa-dev libglu1-mesa-dev \
+            libcurl4-openssl-dev \
+            libx11-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev
+
+      - name: Configure
+        working-directory: graphics-app
+        run: cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        working-directory: graphics-app
+        run: cmake --build build --parallel
+
+      - name: Upload binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: Design3D-linux
+          path: graphics-app/build/Design3D
+
+  build-macos:
+    name: macOS 14
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install deps
+        run: brew install cmake ninja curl
+
+      - name: Configure
+        working-directory: graphics-app
+        run: cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        working-directory: graphics-app
+        run: cmake --build build --parallel
+
+      - name: Upload binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: Design3D-macos
+          path: graphics-app/build/Design3D
+
+  build-windows:
+    name: Windows (MSVC)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install curl
+        run: choco install curl --no-progress
+
+      - name: Configure
+        working-directory: graphics-app
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        working-directory: graphics-app
+        run: cmake --build build --config Release --parallel
+
+      - name: Upload binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: Design3D-windows
+          path: graphics-app/build/Release/Design3D.exe
