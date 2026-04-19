@@ -42,6 +42,18 @@ FetchContent_Declare(stb
     GIT_SHALLOW    TRUE)
 FetchContent_MakeAvailable(stb)
 
+FetchContent_Declare(curl
+    GIT_REPOSITORY https://github.com/curl/curl.git
+    GIT_TAG        curl-8_5_0
+    GIT_SHALLOW    TRUE)
+FetchContent_MakeAvailable(curl)
+
+FetchContent_Declare(assimp
+    GIT_REPOSITORY https://github.com/assimp/assimp.git
+    GIT_TAG        v5.4.3
+    GIT_SHALLOW    TRUE)
+FetchContent_MakeAvailable(assimp)
+
 file(GLOB_RECURSE APP_SOURCES CONFIGURE_DEPENDS "src/*.cpp" "src/*.c")
 
 set(IMGUI_SOURCES
@@ -59,10 +71,11 @@ target_include_directories(Design3D PRIVATE
     ${imgui_SOURCE_DIR}
     ${imgui_SOURCE_DIR}/backends
     ${stb_SOURCE_DIR}
-    ${glm_SOURCE_DIR})
+    ${glm_SOURCE_DIR}
+    ${curl_SOURCE_DIR}/include
+    ${assimp_SOURCE_DIR}/include)
 
 find_package(OpenGL REQUIRED)
-find_package(CURL REQUIRED)
 
 target_link_libraries(Design3D PRIVATE
     SDL2::SDL2
@@ -71,7 +84,8 @@ target_link_libraries(Design3D PRIVATE
     glm::glm
     nlohmann_json::nlohmann_json
     OpenGL::GL
-    CURL::libcurl)
+    ${curl_BINARY_DIR}/lib/libcurl.so
+    assimp)
 
 if(UNIX AND NOT APPLE AND NOT ANDROID)
     target_link_libraries(Design3D PRIVATE dl pthread)

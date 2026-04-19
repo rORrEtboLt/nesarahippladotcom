@@ -13,7 +13,8 @@ Mesh::~Mesh() {
 }
 
 Mesh::Mesh(Mesh&& o) noexcept
-    : m_vao(o.m_vao), m_vbo(o.m_vbo), m_ebo(o.m_ebo), m_indexCount(o.m_indexCount) {
+    : m_vao(o.m_vao), m_vbo(o.m_vbo), m_ebo(o.m_ebo), m_indexCount(o.m_indexCount)
+    , m_vertices(std::move(o.m_vertices)), m_indices(std::move(o.m_indices)) {
     o.m_vao = o.m_vbo = o.m_ebo = 0;
 }
 
@@ -24,12 +25,16 @@ Mesh& Mesh::operator=(Mesh&& o) noexcept {
         if (m_ebo) glDeleteBuffers(1, &m_ebo);
         m_vao = o.m_vao; m_vbo = o.m_vbo; m_ebo = o.m_ebo;
         m_indexCount = o.m_indexCount;
+        m_vertices = std::move(o.m_vertices);
+        m_indices  = std::move(o.m_indices);
         o.m_vao = o.m_vbo = o.m_ebo = 0;
     }
     return *this;
 }
 
 void Mesh::upload(const std::vector<Vertex>& verts, const std::vector<uint32_t>& idx) {
+    m_vertices = verts;
+    m_indices  = idx;
     m_indexCount = static_cast<uint32_t>(idx.size());
     glGenVertexArrays(1, &m_vao);
     glGenBuffers(1, &m_vbo);
@@ -37,10 +42,10 @@ void Mesh::upload(const std::vector<Vertex>& verts, const std::vector<uint32_t>&
     glBindVertexArray(m_vao);
 
     glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-    glBufferData(GL_ARRAY_BUFFER, verts.size() * sizeof(Vertex), verts.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, m_vertices.size() * sizeof(Vertex), m_vertices.data(), GL_STATIC_DRAW);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ebo);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, idx.size() * sizeof(uint32_t), idx.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_indices.size() * sizeof(uint32_t), m_indices.data(), GL_STATIC_DRAW);
 
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
@@ -157,4 +162,10 @@ Mesh Mesh::makeCylinder(float radius, float height, int slices) {
         idx.insert(idx.end(), {a, a+2, a+1, a+1, a+2, a+3});
     }
     Mesh m; m.upload(verts, idx); return m;
+}
+
+Mesh Mesh::CSG(const Mesh& /*a*/, const Mesh& /*b*/, CSGOperation /*op*/) {
+    Mesh m;
+    std::cerr << "CSG: libigl not yet integrated — install Eigen and libigl headers first.\n";
+    return m;
 }

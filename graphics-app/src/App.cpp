@@ -54,7 +54,6 @@ bool App::init() {
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO();
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
-    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
     ImGui::StyleColorsDark();
     ImGui_ImplSDL2_InitForOpenGL(m_window, m_glCtx);
     ImGui_ImplOpenGL3_Init("#version 410");
@@ -65,7 +64,8 @@ bool App::init() {
     m_scene = std::make_unique<Scene>();
     m_scene->loadDefault();
 
-    m_ui = std::make_unique<UI>(*m_scene, *m_renderer);
+    m_config.load();
+    m_ui = std::make_unique<UI>(*m_scene, *m_renderer, m_config);
     m_running = true;
     return true;
 }

@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include <string>
 #include <memory>
+#include "config/Config.h"
 
 class Renderer;
 class Scene;
@@ -33,4 +34,5 @@ private:
     std::unique_ptr<Renderer> m_renderer;
     std::unique_ptr<Scene>    m_scene;
     std::unique_ptr<UI>       m_ui;
+    Config                     m_config;
 };

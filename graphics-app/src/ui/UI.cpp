@@ -1,6 +1,7 @@
 #include "UI.h"
 #include "../scene/Scene.h"
 #include "../renderer/Renderer.h"
+#include "../config/Config.h"
 #include "../ai/MiniMaxClient.h"
 
 #include <imgui.h>
@@ -8,6 +9,7 @@
 #include <algorithm>
 #include <cstdlib>
 #include <cstdio>
+#include <cstring>
 #include <thread>
 #include <atomic>
 
@@ -15,10 +17,41 @@ static std::unique_ptr<MiniMaxClient> s_ai;
 static std::string       s_asyncResponse;
 static std::atomic<bool> s_responseReady{false};
 
-UI::UI(Scene& scene, Renderer& renderer) : m_scene(scene), m_renderer(renderer) {
-    const char* key   = std::getenv("MINIMAX_API_KEY");
-    const char* group = std::getenv("MINIMAX_GROUP_ID");
-    s_ai = std::make_unique<MiniMaxClient>(key ? key : "", group ? group : "");
+static std::string buildSceneContext(const Scene& scene) {
+    std::string ctx = "=== CURRENT SCENE STATE ===\n";
+    const auto& objs = scene.objects();
+    if (objs.empty()) {
+        ctx += "Scene is empty.\n";
+    } else {
+        for (const auto& o : objs) {
+            glm::vec3 pos(o.transform[3]);
+            ctx += o.name + " | pos=(" + std::to_string(pos.x) + "," + std::to_string(pos.y) + "," + std::to_string(pos.z) + ")";
+            ctx += " | color=(" + std::to_string(o.albedo.r) + "," + std::to_string(o.albedo.g) + "," + std::to_string(o.albedo.b) + ")";
+            ctx += " | metallic=" + std::to_string(o.metallic) + " | roughness=" + std::to_string(o.roughness);
+            if (o.selected) ctx += " [SELECTED]";
+            ctx += "\n";
+        }
+    }
+    ctx += "\n=== AVAILABLE ACTIONS ===\n";
+    ctx += "- add: add a new primitive (cube/sphere/plane/cylinder) to the scene\n";
+    ctx += "- remove: remove an object by name\n";
+    ctx += "- modify: change an object's properties (color/albedo, metallic, roughness, position)\n";
+    ctx += "\n=== RESPONSE FORMAT ===\n";
+    ctx += "Always respond with a JSON object containing:\n";
+    ctx += "- \"commands\": array of {action, target, property, value}\n";
+    ctx += "- \"description\": brief human-readable summary\n";
+    ctx += "Example: {\"commands\":[{\"action\":\"add\",\"target\":\"sphere\"},{\"action\":\"modify\",\"target\":\"Cube_0\",\"property\":\"color\",\"value\":\"0.8,0.2,0.3\"}],\"description\":\"Added a sphere and made Cube_0 red.\"}\n";
+    ctx += "\n=== USER REQUEST ===\n";
+    return ctx;
+}
+
+UI::UI(Scene& scene, Renderer& renderer, Config& config)
+    : m_scene(scene), m_renderer(renderer), m_config(config) {
+    s_ai = std::make_unique<MiniMaxClient>(
+        config.getMiniMaxApiKey(),
+        config.getMiniMaxGroupId(),
+        config.getMiniMaxApiHost());
+    s_ai->setModel(config.getMiniMaxModel());
 }
 
 void UI::draw() {
@@ -27,6 +60,8 @@ void UI::draw() {
     drawProperties();
     drawAIPanel();
     drawCameraPanel();
+    if (m_showSettings)
+        drawSettingsPanel();
 }
 
 void UI::drawMenuBar() {
@@ -106,10 +141,25 @@ void UI::drawAIPanel() {
     ImGui::Begin("AI Design (MiniMax)", nullptr,
         ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
 
-    if (!s_ai->isConfigured())
-        ImGui::TextColored({1.f, 0.6f, 0.f, 1.f}, "Set MINIMAX_API_KEY to enable AI prompts.");
+    // Status + settings button in title bar
+    ImGui::TextColored(s_ai->isConfigured() ? ImVec4(0.4f,0.9f,0.4f,1.f) : ImVec4(1.f,0.6f,0.f,1.f),
+        "%s", s_ai->isConfigured() ? "Configured" : "Not configured");
+    ImGui::SameLine();
+    if (ImGui::SmallButton("Settings")) m_showSettings = !m_showSettings;
 
+    // Prompt input with right-click context menu (copy/paste)
     ImGui::InputTextMultiline("##prompt", m_promptBuf, sizeof(m_promptBuf), {424, 80});
+    if (ImGui::BeginPopupContextItem("##prompt_ctx")) {
+        if (ImGui::MenuItem("Copy", "Ctrl+C", false, true))
+            ImGui::SetClipboardText(m_promptBuf);
+        if (ImGui::MenuItem("Paste", "Ctrl+V", false, true)) {
+            const char* txt = ImGui::GetClipboardText();
+            if (txt && strlen(m_promptBuf) + strlen(txt) < sizeof(m_promptBuf) - 1) {
+                strncat(m_promptBuf, txt, sizeof(m_promptBuf) - strlen(m_promptBuf) - 1);
+            }
+        }
+        ImGui::EndPopup();
+    }
 
     if (s_responseReady.exchange(false)) {
         applyAIResponse(s_asyncResponse);
@@ -121,9 +171,11 @@ void UI::drawAIPanel() {
     if (ImGui::Button("Send to AI")) {
         m_busy = true;
         m_statusMsg = "Waiting for MiniMax...";
-        std::string msg(m_promptBuf);
-        std::thread([msg]() {
-            s_asyncResponse = s_ai->prompt(msg);
+        std::string sceneCtx = buildSceneContext(m_scene);
+        std::string userPrompt = std::string(m_promptBuf);
+        std::string fullPrompt = sceneCtx + userPrompt;
+        std::thread([fullPrompt]() {
+            s_asyncResponse = s_ai->prompt(fullPrompt);
             s_responseReady.store(true);
         }).detach();
     }
@@ -134,8 +186,20 @@ void UI::drawAIPanel() {
 
     if (!m_lastAIResponse.empty()) {
         ImGui::Separator();
-        std::string preview = m_lastAIResponse.substr(0, 180);
-        ImGui::TextWrapped("%s", preview.c_str());
+        ImGui::AlignTextToFramePadding();
+        ImGui::Text("Response:"); ImGui::SameLine();
+        if (ImGui::SmallButton("Copy")) {
+            ImGui::SetClipboardText(m_lastAIResponse.c_str());
+            m_statusMsg = "Response copied to clipboard.";
+        }
+        ImGui::Separator();
+        std::string preview = m_lastAIResponse.substr(0, 500);
+        ImGui::Selectable(preview.c_str(), false, 0, {424, 80});
+        if (ImGui::BeginPopupContextItem("##resp_copy")) {
+            if (ImGui::MenuItem("Copy Response", nullptr, false, true))
+                ImGui::SetClipboardText(m_lastAIResponse.c_str());
+            ImGui::EndPopup();
+        }
     }
     ImGui::End();
 }
@@ -151,6 +215,66 @@ void UI::drawCameraPanel() {
     ImGui::SliderFloat("Radius", &cam.radius,   1.f,  80.f);
     ImGui::TextDisabled("Right-drag or middle-drag to orbit");
     ImGui::TextDisabled("Scroll to zoom");
+    ImGui::End();
+}
+
+void UI::drawSettingsPanel() {
+    ImGui::SetNextWindowPos({400, 150}, ImGuiCond_Appearing);
+    ImGui::SetNextWindowSize({420, 300}, ImGuiCond_Appearing);
+    ImGui::Begin("MiniMax Settings", &m_showSettings);
+
+    static char apiKeyBuf[256] = {};
+    static char groupIdBuf[256] = {};
+    static char modelBuf[64] = {};
+    static char hostBuf[128] = {};
+    static bool initialized = false;
+    if (!initialized) {
+        snprintf(apiKeyBuf,  sizeof(apiKeyBuf),  "%s", m_config.getMiniMaxApiKey().c_str());
+        snprintf(groupIdBuf, sizeof(groupIdBuf), "%s", m_config.getMiniMaxGroupId().c_str());
+        snprintf(modelBuf,   sizeof(modelBuf),   "%s", m_config.getMiniMaxModel().c_str());
+        snprintf(hostBuf,    sizeof(hostBuf),    "%s", m_config.getMiniMaxApiHost().c_str());
+        initialized = true;
+    }
+
+    ImGui::TextDisabled("API Host");
+    ImGui::InputText("##host", hostBuf, sizeof(hostBuf));
+    ImGui::TextDisabled("  https://api.minimax.io (global) | https://api.minimaxi.com (mainland CN)");
+
+    ImGui::TextDisabled("API Key (minimax.chat account required)");
+    ImGui::InputText("##apikey", apiKeyBuf, sizeof(apiKeyBuf),
+        ImGuiInputTextFlags_Password);
+
+    ImGui::TextDisabled("Group ID (optional, from MiniMax dashboard)");
+    ImGui::InputText("##groupid", groupIdBuf, sizeof(groupIdBuf));
+
+    ImGui::TextDisabled("Model");
+    ImGui::InputText("##model", modelBuf, sizeof(modelBuf));
+    ImGui::TextDisabled("  MiniMax-M2.7 | MiniMax-M2.5 | MiniMax-M2.1");
+
+    if (ImGui::Button("Save")) {
+        m_config.setMiniMaxApiHost(hostBuf);
+        m_config.setMiniMaxApiKey(apiKeyBuf);
+        m_config.setMiniMaxGroupId(groupIdBuf);
+        m_config.setMiniMaxModel(modelBuf);
+        if (m_config.save()) {
+            s_ai->setApiHost(hostBuf);
+            s_ai->setApiKey(apiKeyBuf);
+            s_ai->setGroupId(groupIdBuf);
+            s_ai->setModel(modelBuf);
+            m_statusMsg = "Settings saved and applied.";
+        } else {
+            m_statusMsg = "Failed to save settings.";
+        }
+        initialized = false;
+    }
+
+    ImGui::SameLine();
+    if (ImGui::Button("Close")) {
+        m_showSettings = false;
+        initialized = false;
+    }
+
+    ImGui::TextDisabled("Config: %s", m_config.configPath().c_str());
     ImGui::End();
 }
 
