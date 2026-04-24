@@ -1,16 +1,16 @@
 name: Build and publish to website repo
 
 on:
-  # Every merge/push to master publishes the site.
   push:
     branches: [master]
-  # Manual re-runs from the Actions tab.
   workflow_dispatch:
 
-# Only one publish at a time; queue any newer runs.
 concurrency:
   group: publish-website
   cancel-in-progress: false
+
+permissions:
+  contents: read
 
 jobs:
   publish:
@@ -32,7 +32,7 @@ jobs:
       - name: Build static site into docs/
         run: npm run build:static
         env:
-          CI: 'false' # eslint warnings shouldn't fail the build
+          CI: 'false'
 
       - name: Checkout target website repo
         uses: actions/checkout@v4
@@ -47,7 +47,6 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          # Preserve CNAME (and anything you list here) across deploys.
           mkdir -p /tmp/preserve
           for keep in CNAME; do
             if [ -e "website-repo/$keep" ]; then
@@ -56,12 +55,9 @@ jobs:
             fi
           done
 
-          # Wipe everything in the website repo except .git, then copy the
-          # freshly built static site into the root.
           find website-repo -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
           cp -R docs/. website-repo/
 
-          # Restore preserved files.
           for keep in CNAME; do
             if [ -e "/tmp/preserve/$keep" ]; then
               cp -R "/tmp/preserve/$keep" "website-repo/$keep"
