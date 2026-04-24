@@ -3,13 +3,11 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
 import './styles/globals.css';
-import 'highlight.js/styles/github-dark.css';
 
-import Home from './pages/Home';
-import Flat from './pages/Flat';
+import ProjectGrid from './pages/ProjectGrid';
+import WorkDetail from './pages/WorkDetail';
+import About from './pages/About';
 
-// Strip trailing slash so basename works when PUBLIC_URL is a full or
-// relative path. Falls back to "/" so local dev keeps working.
 function getBasename() {
   const url = process.env.PUBLIC_URL || '';
   try {
@@ -25,10 +23,10 @@ function App() {
     <HelmetProvider>
       <Router basename={getBasename()}>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/flat" element={<Flat />} />
-          <Route path="/flat/*" element={<Flat />} />
-          <Route path="*" element={<Home />} />
+          <Route path="/" element={<ProjectGrid />} />
+          <Route path="/work/:slug" element={<WorkDetail />} />
+          <Route path="/about" element={<About />} />
+          <Route path="*" element={<ProjectGrid />} />
         </Routes>
       </Router>
     </HelmetProvider>
