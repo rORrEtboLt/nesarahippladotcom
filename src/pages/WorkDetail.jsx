@@ -37,11 +37,17 @@ export default function WorkDetail() {
         </header>
 
         <main className="page-main">
-          <img
-            className="work-hero"
-            src={project.images[0]}
-            alt={project.name}
-          />
+          {(() => {
+            const hero = project.images[0];
+            const heroSrc = typeof hero === 'string' ? hero : hero.url;
+            const heroCaption = typeof hero === 'string' ? null : hero.caption;
+            return (
+              <figure className="work-hero-figure">
+                <img className="work-hero" src={heroSrc} alt={heroCaption || project.name} />
+                {heroCaption && <figcaption className="work-img-caption">{heroCaption}</figcaption>}
+              </figure>
+            );
+          })()}
 
           <div className="work-header">
             <h1 className="work-title">{project.name}</h1>
@@ -55,9 +61,16 @@ export default function WorkDetail() {
           </div>
 
           <div className="work-gallery">
-            {project.images.slice(1).map((src, i) => (
-              <img key={i} src={src} alt={`${project.name} ${i + 2}`} />
-            ))}
+            {project.images.slice(1).map((img, i) => {
+              const src = typeof img === 'string' ? img : img.url;
+              const caption = typeof img === 'string' ? null : img.caption;
+              return (
+                <figure key={i} className="work-gallery-figure">
+                  <img src={src} alt={caption || `${project.name} ${i + 2}`} />
+                  {caption && <figcaption className="work-img-caption">{caption}</figcaption>}
+                </figure>
+              );
+            })}
           </div>
 
           <div className="work-closing">
@@ -85,7 +98,7 @@ export default function WorkDetail() {
             <nav className="footer-links">
               <a href={`mailto:${profile.email}`}>Email</a>
               <a href={profile.socials.github} target="_blank" rel="noreferrer">GitHub</a>
-              <a href={profile.socials.twitter} target="_blank" rel="noreferrer">Twitter</a>
+              <a href={profile.socials.instagram} target="_blank" rel="noreferrer">Instagram</a>
             </nav>
             <p className="footer-copy">&copy; {new Date().getFullYear()} {profile.name}</p>
           </div>

@@ -3,12 +3,29 @@
     "slug": "cottage",
     "name": "The Cottage",
     "tagline": "Built by hand, with friends, in the hills",
-    "story": "I met Sem and Dafne while volunteering in Hampi. Back story matters — I learned through them that you can travel, build, and live fully in tune with nature and your own emotions. We were constructing a small stone pond that summer: cooking together, swimming in the Bhadra, exploring the rocks and temples around us. No alcohol, no substances — just the quiet of working with your hands, growing your own food, learning Italian cooking from Dafne, and stone philosophy from Sem.\n\nWhen they visited me later in Chikmaglur, we decided to build something together. After a humble new year, we started on a wooden cottage. Stones as foundation in two-foot-deep holes, then wood frames — ten by ten, though it came out maybe ten by eleven.\n\nIn ten days we had a floor and four pillars for a roof. When they left, I had to find the momentum alone. Working solo can be daunting. The rains came and vehicles couldn't reach the site — everything had to be carried up by hand. Two heavy generators lugged up because there was no power for tools. Somehow, before the monsoon fully arrived, I got the roof on with help from my dad and his people.\n\nWalls went up. Old windows were salvaged and fitted. The cottage found its shape. It's still not finished — but it stands.",
-    "closing": "A quiet place to think, built with people I'll never forget, in a landscape that shaped how I understand shelter and belonging.",
+    "story": "It started, like many good things, with people met by accident in the right place. I found Sem and Dafne while volunteering in Hampi — two travellers who'd figured out that the best way to be somewhere is to build something, cook something, fix something. We made a small stone pond together, swam in the Bhadra, cooked meals that took all afternoon. No rush, no plan, just the quiet rhythm of hands and days.\n\nWhen they came to Chikmaglur, we decided to build a cottage. Simple enough in theory. We marked out a floor frame in the forest — ten by ten feet, though if you measure it now it's more like ten by eleven, which feels about right for something built by feel rather than blueprint.\n\nThe first few days were the happiest. Everyone pitching in, lifting, laughing, figuring it out together. Granite stones hauled in for foundations. Timber laid out in the morning light. The frame going up fast when there are three of you and you're not thinking about whether it will work — you're just doing it.\n\nThen Sem and Dafne left, and I was alone with an unfinished floor and a lot of timber. Working solo is a different thing entirely. The forest gets quiet. You find out what you actually believe about yourself when no one's watching. The rains came early and the track turned to mud — no vehicle could reach the site, so everything came in on foot or on shoulder. Two generators carried up by hand because there was no power for tools. It was slow, sometimes discouraging, occasionally absurd.\n\nBut the roof went on before the monsoon. With my dad and his friends showing up one morning and just getting it done, the way people here do — quietly, without fuss, without being asked twice. Walls went up. Old windows found their way in. The cottage is still unfinished in some corners. But it stands, and the forest has grown a little around it, and on a clear morning the light comes through the trees in a way that makes the whole thing feel worth every heavy step.",
+    "closing": "Some buildings take years to finish. This one is teaching me that a place doesn't need to be complete to be good — it just needs to have been made with the right people, in the right spirit.",
     "images": [
-      "https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=1200&q=80",
-      "https://images.unsplash.com/photo-1504270997636-07ddfbd48945?w=1200&q=80",
-      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80"
+      {
+        "url": "/images/cottage/floor-frame.jpg",
+        "caption": "Measuring the floor frame — ten by ten, give or take an inch"
+      },
+      {
+        "url": "/images/cottage/stone-foundations.jpg",
+        "caption": "Sem, the granite stones, and a yellow bucket that went everywhere with us"
+      },
+      {
+        "url": "/images/cottage/frame-complete.jpg",
+        "caption": "The frame level and raised — the forest opened up just enough"
+      },
+      {
+        "url": "/images/cottage/timber-hauling.jpg",
+        "caption": "Hauling timber from the car — the track was just wide enough, barely"
+      },
+      {
+        "url": "/images/cottage/dafne-and-dog.jpg",
+        "caption": "Dafne, the dog, and the moment we realised it was actually happening"
+      }
     ]
   },
   {
