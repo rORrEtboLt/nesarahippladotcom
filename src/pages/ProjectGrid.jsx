@@ -32,7 +32,7 @@ export default function ProjectGrid() {
               >
                 <div className="tile-img">
                   <img
-                    src={project.images[0]}
+                    src={typeof project.images[0] === 'string' ? project.images[0] : project.images[0].url}
                     alt={project.name}
                     loading="lazy"
                   />
@@ -53,7 +53,7 @@ export default function ProjectGrid() {
             <nav className="footer-links">
               <a href={`mailto:${profile.email}`}>Email</a>
               <a href={profile.socials.github} target="_blank" rel="noreferrer">GitHub</a>
-              <a href={profile.socials.twitter} target="_blank" rel="noreferrer">Twitter</a>
+              <a href={profile.socials.instagram} target="_blank" rel="noreferrer">Instagram</a>
             </nav>
             <p className="footer-copy">&copy; {new Date().getFullYear()} {profile.name}</p>
           </div>
