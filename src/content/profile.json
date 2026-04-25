@@ -1,19 +1,17 @@
 {
   "name": "Nesara Hippla",
-  "tagline": "Software engineer, maker, and open-source enthusiast.",
-  "bio": "Hi! I build thoughtful software, explore creative tech, and write about what I learn along the way. This little 3D world is my corner of the internet — feel free to look around.",
-  "location": "The Internet",
-  "email": "hello@nesarahippla.com",
+  "tagline": "Art in everything.",
+  "bio": "Artist, programmer, builder, farmer, coffee roaster, sailor, ceramicist, and dog parent — living in the coffee hills of Chikmaglur. I build with code, clay, wood, and earth. I believe everything made with care is, at its heart, a form of art.",
+  "location": "Chikmaglur, Karnataka",
+  "email": "nesara.hippla@gmail.com",
   "socials": {
-    "github": "https://github.com/",
-    "twitter": "https://twitter.com/",
-    "linkedin": "https://linkedin.com/",
-    "mastodon": "https://mastodon.social/"
+    "github": "https://github.com/rORrEtboLt",
+    "instagram": "https://www.instagram.com/nesara.hippla/"
   },
   "support": {
-    "buyMeACoffee": "https://www.buymeacoffee.com/",
-    "patreon": "https://www.patreon.com/",
-    "githubSponsors": "https://github.com/sponsors/"
+    "buyMeACoffee": "",
+    "patreon": "",
+    "githubSponsors": "https://github.com/sponsors/rORrEtboLt"
   },
-  "githubUsername": ""
+  "githubUsername": "rORrEtboLt"
 }

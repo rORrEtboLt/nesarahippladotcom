@@ -30,17 +30,17 @@ export default function About() {
 
               <h2>Currently</h2>
               <p>
-                I'm available for freelance software projects, creative collaborations, and the odd interesting problem. I work across the full stack but am most at home at the intersection of software and physical things — embedded systems, creative tools, and the kind of product that makes you want to show someone.
+                I'm available for freelance projects, creative collaborations, and the kind of work that doesn't fit neatly into a category. I'm most at home where software meets the physical world — embedded systems, creative tools, and things that respond to the real environment.
               </p>
               <p>
-                When I'm not writing code, I'm probably painting, in a shop somewhere, or somewhere with no wifi.
+                When I'm not writing code, I'm roasting coffee, at the pottery wheel, planting trees, sailing, or somewhere without wifi.
               </p>
 
               <h2>Get in touch</h2>
               <p>
                 The best way to reach me is email:{' '}
                 <a href={`mailto:${profile.email}`}>{profile.email}</a>
-                . I try to respond within a day or two. I'm also on GitHub and occasionally Twitter.
+                . I try to respond within a day or two. You can also find me on Instagram and GitHub.
               </p>
             </div>
 
@@ -49,8 +49,7 @@ export default function About() {
                 <h3>Find me</h3>
                 <ul>
                   <li><a href={profile.socials.github} target="_blank" rel="noreferrer">GitHub</a></li>
-                  <li><a href={profile.socials.twitter} target="_blank" rel="noreferrer">Twitter</a></li>
-                  <li><a href={profile.socials.linkedin} target="_blank" rel="noreferrer">LinkedIn</a></li>
+                  <li><a href={profile.socials.instagram} target="_blank" rel="noreferrer">Instagram</a></li>
                 </ul>
               </div>
 
@@ -75,7 +74,7 @@ export default function About() {
             <nav className="footer-links">
               <a href={`mailto:${profile.email}`}>Email</a>
               <a href={profile.socials.github} target="_blank" rel="noreferrer">GitHub</a>
-              <a href={profile.socials.twitter} target="_blank" rel="noreferrer">Twitter</a>
+              <a href={profile.socials.instagram} target="_blank" rel="noreferrer">Instagram</a>
             </nav>
             <p className="footer-copy">&copy; {new Date().getFullYear()} {profile.name}</p>
           </div>
