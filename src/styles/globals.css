@@ -463,6 +463,228 @@ img {
   text-decoration: none;
 }
 
+/* ── Admin Upload ─────────────────────────────────── */
+
+.admin-page {
+  min-height: 100vh;
+  background: var(--bg);
+  padding: 48px var(--page-px);
+}
+
+.admin-inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.admin-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 32px;
+}
+
+.admin-token-section {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 40px;
+}
+
+.admin-token-hint {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.admin-token-hint a {
+  color: var(--text);
+  text-decoration: underline;
+}
+
+.admin-token-row {
+  display: flex;
+  gap: 8px;
+}
+
+.admin-token-input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.admin-token-save {
+  padding: 10px 20px;
+  background: var(--text);
+  color: var(--bg);
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.admin-token-save:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.admin-token-saved {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.admin-token-clear {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  color: var(--text-secondary);
+}
+
+.admin-project-section {
+  margin-bottom: 40px;
+}
+
+.admin-project-name {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.admin-slots {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 480px) {
+  .admin-slots {
+    grid-template-columns: 1fr;
+  }
+}
+
+.upload-slot {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  border: 1.5px dashed var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.upload-slot:active {
+  background: var(--surface);
+}
+
+.upload-slot--done {
+  border-style: solid;
+  border-color: #34c759;
+  background: #f0fff4;
+}
+
+.upload-slot--error {
+  border-color: #ff3b30;
+  background: #fff5f5;
+}
+
+.upload-slot--uploading {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.upload-slot-preview {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.upload-slot-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.upload-slot--done .upload-slot-icon {
+  background: #34c759;
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.upload-slot--error .upload-slot-icon {
+  background: #ff3b30;
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.upload-slot-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
+}
+
+.upload-slot-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.upload-slot-filename {
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-family: ui-monospace, monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.upload-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border);
+  border-top-color: var(--text);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: block;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.admin-locked-note {
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-top: 16px;
+}
+
 /* =====================================================
    About Page
    ===================================================== */
