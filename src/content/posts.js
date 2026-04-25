@@ -4,103 +4,122 @@
 
 const posts = [
   {
-    slug: 'welcome',
-    title: 'Welcome to my little 3D world',
-    date: '2026-04-12',
-    excerpt: 'Why I rebuilt my site as an interactive, game-like experience.',
-    tags: ['meta', 'three.js'],
-    content: `# Welcome!
+    slug: 'art-in-everything',
+    title: 'Art in everything',
+    date: '2026-04-20',
+    excerpt: 'Why I stopped treating art as a separate activity.',
+    tags: ['making', 'philosophy', 'life'],
+    content: `# Art in everything
 
-Thanks for wandering in. This site is less of a CV and more of a tiny, curated
-room that happens to host my writing and open-source work.
+I used to keep the categories separate. Programmer. Artist. Builder. Farmer. Coffee person.
 
-## Why a 3D site?
+The categories made it easier to explain myself, but they weren't honest. They implied that each thing lived in a different room, and that I stepped between them. That's not how it feels from the inside.
 
-I spend my days looking at rectangles full of text. I wanted my homepage to
-feel like a *place* rather than a page — something you explore at your own pace.
+The truth is closer to this: when I'm roasting coffee, I'm tasting color. When I'm building a mud wall, I'm reading a material the way you read a poem — slowly, with your whole body, open to being surprised. When I write code, I'm looking for the same thing I look for in a good pot from the kiln: a form that serves its purpose so fully that it seems inevitable.
 
-- **Monitor** → a short about-me
-- **Notebook** → the blog you're reading right now
-- **Bookshelf** → open-source projects
-- **Coffee mug** → ways to support my work
-- **Mailbox** → get in touch
+I think "art" is not a category of activity. It's a quality of attention.
 
-## Under the hood
+## The attention test
 
-The scene is rendered with [React Three Fiber](https://r3f.docs.pmnd.rs/) and
-[drei](https://github.com/pmndrs/drei). Camera moves use springs, posts are
-plain Markdown, and the whole thing falls back to a flat HTML version if your
-device prefers reduced motion.
+Something is made with art when the maker was fully present — when they noticed what the material was doing, listened to what the work wanted to become, and made decisions that reflected genuine care rather than just efficiency.
 
-> Have fun clicking things. Press \`Esc\` to return to the overview at any time.
+By that definition, I've met farmers who are great artists. I've seen code that's a work of art. I've also seen paintings made without any real attention at all.
+
+## Why this matters
+
+It matters because the category of "artist" can become a cage. It implies a certain kind of output (visual, precious, for galleries), a certain kind of person (sensitive, slightly impractical), and a certain kind of time (separate from regular life).
+
+I prefer to think about the quality of attention I bring to whatever I'm doing. Am I fully here? Am I noticing what's happening? Am I willing to be changed by it?
+
+That standard applies to writing a function, kneading clay, sailing across a headwind, or sitting with a dog in the evening.
+
+Everything you do carefully is a form of art. That's not a metaphor. That's the thing itself.
 
 — Nesara
 `,
   },
   {
-    slug: 'hello-three',
-    title: 'Five things I wish I knew before picking up Three.js',
-    date: '2026-03-28',
-    excerpt: 'Hard-won lessons from shipping my first interactive 3D site.',
-    tags: ['three.js', 'graphics', 'webgl'],
-    content: `# Five things I wish I knew before picking up Three.js
+    slug: 'roasting-coffee',
+    title: 'Learning to roast coffee in the town where it grows',
+    date: '2026-03-10',
+    excerpt: 'Notes from a first-generation home roaster in Chikmaglur.',
+    tags: ['coffee', 'chikmaglur', 'craft'],
+    content: `# Learning to roast coffee in the town where it grows
 
-Three.js is magical — and full of sharp edges. Here are the lessons that saved
-me the most time.
+Chikmaglur has grown coffee for over three hundred years. The Baba Budan hills were named for the Sufi saint who, legend says, brought seven seeds from Yemen in the 1600s, smuggled in his beard, and planted them on these slopes.
 
-## 1. Units are arbitrary, but be consistent
+I grew up surrounded by coffee estates. The smell of ripe cherries fermenting on tarpaulins. The green hiss of the pulping machines. The low sheds where beans dry on raised beds for weeks. I knew all of this as background, the way you know the weather — not something you think about, just something that is.
 
-Pick meters, stick to meters. Mixing centimeters and meters across imported
-models will wreck your lighting and shadow bias.
+It took me until I was an adult to realize I didn't actually know anything about coffee.
 
-## 2. Postprocessing is not free
+## The green bean problem
 
-Bloom looks great in screenshots and eats frames on mobile. Guard it behind a
-device-pixel-ratio or reduced-motion check.
+When you buy roasted coffee, you're buying a finished product. You taste the roaster's decisions. Home roasting is different: you start with something that smells like fresh-cut hay and tastes of nothing useful, and you are responsible for transforming it.
 
-## 3. Raycasting needs large targets
+Green beans carry all the flavor precursors — acids, sugars, amino acids — but none of the flavors themselves. Heat is the catalyst. The Maillard reaction turns sugars and amino acids into hundreds of new aromatic compounds. Caramelization takes over later. The roaster's job is to apply heat in a way that develops the good things and drives off the bad.
 
-Users don't hover over coffee mugs with pixel precision. Wrap small hotspots
-with an invisible, slightly larger mesh that handles pointer events.
+## What I learned the hard way
 
-## 4. Camera transitions via springs > lerps
+**First crack is your landmark.** Around 196°C, the beans release steam in an audible first crack — like popcorn, spread across a minute or two. This marks the beginning of light roast territory. Pull before this and the cup will taste grassy and underdeveloped.
 
-\`@react-spring/three\` turns a chaotic camera into a pleasant one.
+**Airflow matters as much as heat.** Chaff from the beans needs somewhere to go. Poor airflow means smoke taints the cup. I learned this by ruining several batches before I understood why.
 
-## 5. Ship a 2D fallback
+**Rest your coffee.** Freshly roasted coffee is surprisingly bad. For the first 24–48 hours, CO₂ outgassing interferes with extraction. The sweet spot for most roasts is 4–10 days post-roast. Patience is part of the recipe.
 
-Not every visitor has a GPU, good bandwidth, or a vestibular system that loves
-flying cameras. A \`/flat\` route is respectful *and* SEO-friendly.
+## The advantage of place
 
-Happy rendering!
+I live a few kilometres from estates that grow some of India's best arabica. That means I can buy green beans at origin prices and experiment with varieties that don't make it into commercial export — small lots, unusual processing experiments.
+
+Last month I roasted a honey-processed Kaveri variety from a tiny estate near Kemmangundi. The resulting cup had strawberry and brown sugar notes I've never found in anything commercially available.
+
+That cup felt like the point of all of it.
+
+— Nesara
 `,
   },
   {
-    slug: 'open-source-notes',
-    title: 'Keeping small open-source projects joyful',
-    date: '2026-02-14',
-    excerpt: 'A few rituals that keep side-project burnout at bay.',
-    tags: ['open-source', 'career'],
-    content: `# Keeping small open-source projects joyful
+    slug: 'building-with-earth',
+    title: 'What building with mud taught me',
+    date: '2026-02-05',
+    excerpt: 'Patience, material intelligence, and why the old ways have engineering inside them.',
+    tags: ['building', 'mud', 'craft', 'life'],
+    content: `# What building with mud taught me
 
-Shipping something to GitHub is easy. Keeping it alive without burning out is
-the harder part. Here's what works for me.
+The first mud wall I ever built cracked.
 
-## Set a cadence, not a deadline
+I'd done the research. I'd done the jar test — fill a jar with soil and water, shake, let it settle for 24 hours, and read the layers to understand your clay-to-sand ratio. My soil had a good ratio. I mixed in rice husk for fiber. I added lime for stability. And then I built too fast, in the afternoon heat, on a section without enough shade.
 
-"One small PR every Sunday morning" beats "I'll finish this feature by Friday".
+The wall dried unevenly and cracked from the inside out. I knocked it down and started again.
 
-## Say no, kindly
+## What the material teaches you
 
-Every issue is a little ask for your attention. It's okay to close ones that
-don't match the project's scope — with a warm note.
+Every building material has a logic. Steel wants to be in tension. Concrete wants compression. Wood has grain, and the grain has an opinion about how forces should flow through it.
 
-## Let the README do the work
+Mud is more demanding than most. It needs moisture to be workable, but moisture is also its enemy once it's built. It needs time: you can only build a foot or two of height per day before the lower sections must cure. It responds to humidity and temperature in ways you have to feel rather than calculate.
 
-A crisp, honest README that says what the project *is* and *isn't* saves
-hours of triage later.
+This is uncomfortable for programmers. We're used to systems where the same input reliably produces the same output. Mud is not like that. Two bags of soil from the same field can behave differently depending on when they were dug, what the weather has been, how long they sat.
 
-Stay curious.
+You have to read the material, not just follow the recipe.
+
+## What it has in common with software
+
+After several months of mud building, I became a better programmer.
+
+I started reading my codebase the way I read soil — looking for the actual properties of the thing in front of me, not the properties I assumed it had. I started noticing when I was moving too fast out of impatience rather than because the work was ready.
+
+Both crafts punish wishful thinking. In mud, wishful thinking cracks. In code, it ships bugs.
+
+Both reward understanding the material deeply before trying to impose your design on it. In mud, that means knowing your soil's shrinkage rate. In code, it means understanding how your framework actually handles state.
+
+## The old ways have engineering inside them
+
+The earthen houses in Chikmaglur that are a hundred years old still stand. They breathe with the humidity. They stay cool in ways that concrete blocks cannot match. They were built by people who didn't have materials science degrees but understood their materials by feel and long experience.
+
+That's a kind of intelligence I want to stay in contact with.
+
+The new wall, built slowly, is still standing. No cracks.
+
+— Nesara
 `,
   },
 ];

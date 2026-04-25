@@ -1,10 +1,10 @@
 [
   {
     "slug": "cottage",
-    "name": "Cottage",
+    "name": "The Cottage",
     "tagline": "Built by hand, with friends, in the hills",
-    "story": "I met Sem and Dafne while volunteering in Hampi. Back story is important — I learned through them how to do what we love and travel, build, and live in tune with nature and our emotions. We were building a small stone pond to chill in the summer. We cooked. We swam in the Bhadra. Explored around. All without any alcohol, no substances — just learned to live peacefully by working and cooking our food. Learning from Dafne: all the music and language and Italian cuisine. Learning from Sem: all the stone building and philosophy.\n\nThey visited me after their trip to Rishikesh — they came to Chikmaglur. We wanted to build something together. After our humble new year we started building the wooden cottage. We put stones as foundation in two-foot-deep holes and on that, wood frames — ten by ten, which is not exactly ten by ten, maybe ten by eleven :-)\n\nIn ten days we had a floor and four pillars for the roof. Then after they left, I struggled with inspiration, and working alone can be daunting. Somehow, before rain, I got the roof on with help from my dad and his people.\n\nRoof and a floor. Built the wooden walls and fixed some old windows. Got so difficult to move wood during rains because vehicles wouldn't go there — had to carry everything. Carried two heavy generators because there's no power to use power tools. With all this it's reached some shape. But it yet to be finished.",
-    "closing": "What this made possible was a quiet place to think — a room built with people I'll never forget, in a landscape that shaped how I understand shelter.",
+    "story": "I met Sem and Dafne while volunteering in Hampi. Back story matters — I learned through them that you can travel, build, and live fully in tune with nature and your own emotions. We were constructing a small stone pond that summer: cooking together, swimming in the Bhadra, exploring the rocks and temples around us. No alcohol, no substances — just the quiet of working with your hands, growing your own food, learning Italian cooking from Dafne, and stone philosophy from Sem.\n\nWhen they visited me later in Chikmaglur, we decided to build something together. After a humble new year, we started on a wooden cottage. Stones as foundation in two-foot-deep holes, then wood frames — ten by ten, though it came out maybe ten by eleven.\n\nIn ten days we had a floor and four pillars for a roof. When they left, I had to find the momentum alone. Working solo can be daunting. The rains came and vehicles couldn't reach the site — everything had to be carried up by hand. Two heavy generators lugged up because there was no power for tools. Somehow, before the monsoon fully arrived, I got the roof on with help from my dad and his people.\n\nWalls went up. Old windows were salvaged and fitted. The cottage found its shape. It's still not finished — but it stands.",
+    "closing": "A quiet place to think, built with people I'll never forget, in a landscape that shaped how I understand shelter and belonging.",
     "images": [
       "https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=1200&q=80",
       "https://images.unsplash.com/photo-1504270997636-07ddfbd48945?w=1200&q=80",
@@ -12,51 +12,51 @@
     ]
   },
   {
-    "slug": "watercolors",
-    "name": "Watercolors",
-    "tagline": "Pigment, water, paper",
-    "story": "I've been painting with watercolors since I was a kid, though I only started taking it seriously a few years ago. There's something fundamentally different about painting light onto paper versus mixing pixels on a screen — the way the pigment moves without your permission, the way mistakes are permanent, the way you learn to let go.\n\nThese aren't all good. Most of them aren't. But I keep them anyway, because each one is a record of a specific afternoon I can't get back.",
-    "closing": "What this made possible was a better eye for color, composition, and the fact that not everything needs to be perfect to be worth keeping.",
+    "slug": "coffee",
+    "name": "Coffee",
+    "tagline": "Roasting in the town where it grows",
+    "story": "I grew up in Chikmaglur — one of the oldest and finest coffee-growing regions in India. The smell of coffee cherries fermenting on a neighbor's estate, the mist sitting on the Baba Budan hills, the red and green of the harvest season: these are things I've known my whole life.\n\nBut I only started roasting my own beans a few years ago. Home roasting is a different relationship with coffee — you see the full arc of transformation. Green beans that smell grassy and almost floral, then the building heat, the first crack like popcorn, the oils rising, the color shifting through cinnamon to city to full city dark. You make decisions constantly: when to pull, how long to rest before you grind.\n\nI started with a modified popcorn maker, then built a small drum roaster from a salvaged motor and a perforated cylinder. Most batches teach me something. A few batches are exceptional. All of them are mine.\n\nChikmaglur coffee is grown by people who've tended these estates for generations. Being able to take that raw ingredient and bring it through one more step — that feels like the right way to live in this place.",
+    "closing": "Roasting taught me that patience and heat are a form of attention. Every cup is a decision made earlier, fully committed to.",
     "images": [
-      "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=1200&q=80",
-      "https://images.unsplash.com/photo-1579541592104-1e1b68583d5c?w=1200&q=80",
-      "https://images.unsplash.com/photo-1579762593131-bab6def90c27?w=1200&q=80"
+      "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1200&q=80",
+      "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=1200&q=80",
+      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1200&q=80"
     ]
   },
   {
-    "slug": "esp32",
-    "name": "ESP32",
-    "tagline": "Small machines that sense and respond",
-    "story": "I got obsessed with the ESP32 after realizing I could connect the physical world to the internet for less than the price of a burrito. Since then I've built a handful of small devices: a soil moisture sensor for my plants, a door sensor that texts me when the mail arrives, a temperature logger with a little e-ink display.\n\nThe appeal isn't the connectivity — it's the constraints. Five hundred kilobytes of memory. No operating system. Every byte deliberate. It reminds me why I love embedded systems.",
-    "closing": "What this made possible was a home that pays attention, and a reminder that the best engineers solve problems they actually have.",
+    "slug": "mud",
+    "name": "Mud House",
+    "tagline": "Building shelter from the earth beneath your feet",
+    "story": "Mud building is one of humanity's oldest crafts, and one of its most misunderstood. In Chikmaglur, the old houses are built from local red laterite soil, rice husk ash, and jaggery water — materials that breathe with the weather, stay cool in summer, and require no cement, no steel, no supply chains.\n\nI got interested in mud building after visiting a friend's cob house near Mysore. I started small: a garden wall. Then a tool shed. Then something more ambitious — a small room with thick walls and a lime-plastered interior, built almost entirely from the soil I dug from the foundation trench.\n\nThe work is slow and physical. You learn to read soil: the clay content, the shrinkage rate, the way to do a jar test to understand what you're working with. You mix with your feet. You layer and compress. You wait for each section to cure before building higher. There's no shortcut that doesn't weaken the wall.\n\nMud building made me a better programmer, somehow. Both require understanding the material deeply before trying to shape it. Both reward patience over cleverness.",
+    "closing": "A mud wall that stands is a quiet argument: that the old ways have engineering inside them, and that beauty and permanence can come from the ground under your feet.",
     "images": [
-      "https://images.unsplash.com/photo-1580584126903-c17d41814f4b?w=1200&q=80",
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&q=80",
-      "https://images.unsplash.com/photo-1601134467661-3d775b999c8b?w=1200&q=80"
+      "https://images.unsplash.com/photo-1523731407965-2430cd12f5e4?w=1200&q=80",
+      "https://images.unsplash.com/photo-1599707367072-cd6ada2bc375?w=1200&q=80",
+      "https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=1200&q=80"
     ]
   },
   {
-    "slug": "luminara",
-    "name": "LUMINARA",
-    "tagline": "A first-person world in C++",
-    "story": "LUMINARA is a first-person exploration game I built in C++ using a custom renderer — no Unreal, no Unity, just OpenGL and about eighteen months of evenings. The world is small and quiet: a single floating island with ruins, overgrown gardens, and light that behaves the way you want light to behave rather than the way it actually does.\n\nBuilding a renderer from scratch will teach you every layer of the graphics stack. But what I really wanted to understand was why certain spaces feel meaningful. The project became a question I kept asking: what makes a place worth being in?",
-    "closing": "What this made possible was a deep understanding of how GPUs actually work, and a small world that feels like the right size.",
+    "slug": "ceramics",
+    "name": "Ceramics",
+    "tagline": "Hands, clay, fire — and a lot of patience",
+    "story": "I came to ceramics sideways, through a friend who had a wheel in her studio in Bangalore. I expected it to be meditative. It was, eventually — but first it was humbling.\n\nThe wheel is unforgiving of inattention. Clay centers when you're calm, and collapses when you're not. It took weeks before I could open a consistent cylinder. Months before I could pull the walls thin enough to feel elegant. I still lose pieces to cracking, warping, uneven bases. But each failure teaches something specific and clear, which I find satisfying in a way that other kinds of failure often aren't.\n\nI work mostly in terracotta and stoneware — coffee mugs, small bowls, a series of vessels loosely inspired by the shapes of the Bhadra river stones I grew up collecting. I fire in a small kiln shared with other potters in a collective space in Chikmaglur.\n\nCeramics is slow in the way farming is slow: you invest effort into something that won't reveal itself for weeks. You wait for the bisque, then the glaze fire, then the cooling. And when you finally open the kiln, you find out what actually happened.",
+    "closing": "Clay taught me that making beautiful things requires accepting that you cannot fully control them. The imperfection is part of the work.",
     "images": [
-      "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?w=1200&q=80",
-      "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=1200&q=80",
-      "https://images.unsplash.com/photo-1504639725590-34d0988988bd?w=1200&q=80"
+      "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=1200&q=80",
+      "https://images.unsplash.com/photo-1534339480783-6816b5910438?w=1200&q=80",
+      "https://images.unsplash.com/photo-1606722590584-faa09b0c5dbc?w=1200&q=80"
     ]
   },
   {
-    "slug": "workaway",
-    "name": "Workaway",
-    "tagline": "Places I've lived and worked",
-    "story": "For about two years I traveled while working remotely, staying anywhere from a week to a month — friends' spare rooms, month-long sublets, one genuinely haunted Airbnb. The point wasn't the places; it was the texture of what working somewhere different actually does to your brain.\n\nThe best discovery: your environment shapes your creativity more than you think. A change of walls doesn't fix writer's block, but it does make you feel like a different person, and that helps.",
-    "closing": "What this made possible was a much better understanding of where I do my best work, and the luxury of knowing I can set up anywhere.",
+    "slug": "farm",
+    "name": "The Farm",
+    "tagline": "Growing things, sensing things, caring for the land",
+    "story": "I've been planting trees since I was a teenager. Mango, jackfruit, silver oak, and dozens of native forest species that take thirty years to matter. There's something about planting a tree that calibrates your sense of time — you're doing work that your future self, or someone else's future self, will benefit from.\n\nThe farm in Chikmaglur has expanded over the years: coffee plants, pepper vines, vegetables, a small nursery where I propagate things from cuttings and seed. My dog runs the fence line every morning and believes she is personally responsible for the health of the property.\n\nA few years ago I started adding small electronics to the land. Soil moisture sensors wired to ESP32 boards that send readings to a simple dashboard — so I know which beds need water without walking every row. Temperature and humidity loggers in the coffee shade. A rain gauge that logs to a spreadsheet. Nothing sophisticated, but useful in the way that paying attention is useful.\n\nThe technology doesn't replace being in the field. You still have to go look. You still have to smell the soil and feel the leaves. But the sensors catch things you'd miss: a slow dry spell building in a corner, a section running wet after heavy rain. Data and instinct, together.",
+    "closing": "The farm taught me patience on a scale that software can't. A tree planted today is a twenty-year conversation. I'm still learning how to have it.",
     "images": [
-      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&q=80",
-      "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80",
-      "https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=1200&q=80"
+      "https://images.unsplash.com/photo-1500651230702-0e2d8a49d4e7?w=1200&q=80",
+      "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1200&q=80",
+      "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=1200&q=80"
     ]
   }
 ]
