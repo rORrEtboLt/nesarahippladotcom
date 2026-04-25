@@ -268,12 +268,28 @@ img {
    Work Detail Page
    ===================================================== */
 
+.work-hero-figure {
+  margin: 48px 0 56px;
+}
+
 .work-hero {
   width: 100%;
   aspect-ratio: 16 / 7;
   object-fit: cover;
   border-radius: var(--radius);
-  margin: 48px 0 56px;
+}
+
+.work-img-caption {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 8px;
+  text-align: center;
+  font-style: italic;
+}
+
+.work-gallery-figure {
+  display: flex;
+  flex-direction: column;
 }
 
 .work-header {
