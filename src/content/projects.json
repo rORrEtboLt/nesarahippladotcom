@@ -26,6 +26,23 @@
         "url": "/images/cottage/dafne-and-dog.jpg",
         "caption": "Dafne, the dog, and the moment we realised it was actually happening"
       }
+    ],
+    "videos": [
+      {
+        "src": "/images/cottage/clip-1.mp4",
+        "poster": "/images/cottage/floor-frame.jpg",
+        "caption": "Laying out the frame"
+      },
+      {
+        "src": "/images/cottage/clip-2.mp4",
+        "poster": "/images/cottage/stone-foundations.jpg",
+        "caption": "Setting the stone foundations"
+      },
+      {
+        "src": "/images/cottage/clip-3.mp4",
+        "poster": "/images/cottage/frame-complete.jpg",
+        "caption": "The frame takes shape"
+      }
     ]
   },
   {

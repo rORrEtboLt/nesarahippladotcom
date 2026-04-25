@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link, useParams } from 'react-router-dom';
 import projects from '../content/projects.json';
 import profile from '../content/profile.json';
+import VideoCard from '../components/VideoCard';
 
 export default function WorkDetail() {
   const { slug } = useParams();
@@ -72,6 +73,17 @@ export default function WorkDetail() {
               );
             })}
           </div>
+
+          {project.videos && project.videos.length > 0 && (
+            <div className="work-videos">
+              <h2 className="work-videos-title">Footage</h2>
+              <div className="work-video-grid">
+                {project.videos.map((video, i) => (
+                  <VideoCard key={i} src={video.src} poster={video.poster} caption={video.caption} />
+                ))}
+              </div>
+            </div>
+          )}
 
           <div className="work-closing">
             <p>{project.closing}</p>
