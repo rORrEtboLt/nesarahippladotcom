@@ -103,10 +103,6 @@ export default function WorkDetail() {
 
         <footer className="page-footer">
           <div className="footer-inner">
-            <form className="footer-newsletter" onSubmit={(e) => e.preventDefault()}>
-              <input type="email" placeholder="your@email.com" aria-label="Email for newsletter" />
-              <button type="submit">Subscribe</button>
-            </form>
             <nav className="footer-links">
               <a href={`mailto:${profile.email}`}>Email</a>
               <a href={profile.socials.github} target="_blank" rel="noreferrer">GitHub</a>

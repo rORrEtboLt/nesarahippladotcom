@@ -128,46 +128,6 @@ img {
   gap: 24px;
 }
 
-.footer-newsletter {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.footer-newsletter input {
-  flex: 1;
-  min-width: 220px;
-  padding: 10px 14px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  font: inherit;
-  font-size: 14px;
-  color: var(--text);
-  background: var(--bg);
-  outline: none;
-  transition: border-color 0.15s ease;
-}
-
-.footer-newsletter input:focus {
-  border-color: var(--text-secondary);
-}
-
-.footer-newsletter button {
-  padding: 10px 20px;
-  background: var(--text);
-  color: var(--bg);
-  border: none;
-  border-radius: var(--radius);
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: opacity 0.15s ease;
-}
-
-.footer-newsletter button:hover {
-  opacity: 0.8;
-}
-
 .footer-links {
   display: flex;
   gap: 24px;
