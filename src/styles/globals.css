@@ -149,7 +149,138 @@ img {
 }
 
 /* =====================================================
-   Project Grid (Homepage)
+   LinkTree (Homepage)
+   ===================================================== */
+
+.linktree {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  background: var(--bg);
+}
+
+.linktree-inner {
+  width: 100%;
+  max-width: 480px;
+}
+
+.linktree-profile {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.linktree-avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: var(--text);
+  color: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin: 0 auto 20px;
+}
+
+.linktree-name {
+  font-size: clamp(22px, 5vw, 28px);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.linktree-tagline {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.linktree-location {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.linktree-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.linktree-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 16px 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  text-align: center;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+  cursor: pointer;
+}
+
+.linktree-link:hover {
+  background: var(--surface);
+  border-color: var(--text-secondary);
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+
+.linktree-link:active {
+  transform: translateY(0);
+}
+
+.linktree-link-text {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.2px;
+}
+
+.linktree-link-sub {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.linktree-link--coffee {
+  background: var(--text);
+  border-color: var(--text);
+}
+
+.linktree-link--coffee:hover {
+  background: #333;
+  border-color: #333;
+}
+
+.linktree-link--coffee .linktree-link-text {
+  color: var(--bg);
+}
+
+.linktree-link--coffee .linktree-link-sub {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.linktree-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 8px 0;
+}
+
+.linktree-footer {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* =====================================================
+   Project Grid (legacy)
    ===================================================== */
 
 .project-grid {
