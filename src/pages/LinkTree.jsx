@@ -1,11 +1,31 @@
-import React from 'react';
+import React, { lazy, Suspense, useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import profile from '../content/profile.json';
 import projects from '../content/projects.json';
+import LinkIcon3D from '../components/island/LinkIcon3D';
+
+const SceneCanvas = lazy(() => import('../components/island/SceneCanvas'));
+
+const VISIBLE_SLUGS = ['cottage', 'farm'];
+
+function useReducedMotion() {
+  const [reduced, setReduced] = useState(
+    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  );
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const onChange = (e) => setReduced(e.matches);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
+  return reduced;
+}
 
 export default function LinkTree() {
-  const upiUrl = `upi://pay?pa=${encodeURIComponent(profile.buyMeCoffee.upiId)}&pn=${encodeURIComponent(profile.name)}&cu=INR`;
+  const reducedMotion = useReducedMotion();
+  const [hoveredSlug, setHoveredSlug] = useState(null);
+  const visibleProjects = projects.filter(p => VISIBLE_SLUGS.includes(p.slug));
 
   return (
     <>
@@ -26,16 +46,40 @@ export default function LinkTree() {
           </div>
 
           <div className="linktree-links">
-            {projects.map((project) => (
+            {visibleProjects.map((project) => (
               <Link
                 key={project.slug}
                 to={`/work/${project.slug}`}
                 className="linktree-link"
+                onMouseEnter={() => setHoveredSlug(project.slug)}
+                onMouseLeave={() => setHoveredSlug(null)}
               >
-                <span className="linktree-link-text">{project.name}</span>
-                <span className="linktree-link-sub">{project.tagline}</span>
+                {!reducedMotion && (
+                  <LinkIcon3D type={project.slug} hovered={hoveredSlug === project.slug} />
+                )}
+                <div className="linktree-link-content">
+                  <span className="linktree-link-text">{project.name}</span>
+                  <span className="linktree-link-sub">{project.tagline}</span>
+                </div>
               </Link>
             ))}
+
+            <a
+              href="https://rorretbolt.github.io/dweepa/"
+              target="_blank"
+              rel="noreferrer"
+              className="linktree-link"
+              onMouseEnter={() => setHoveredSlug('dweepa')}
+              onMouseLeave={() => setHoveredSlug(null)}
+            >
+              {!reducedMotion && (
+                <LinkIcon3D type="dweepa" hovered={hoveredSlug === 'dweepa'} />
+              )}
+              <div className="linktree-link-content">
+                <span className="linktree-link-text">Dweepa</span>
+                <span className="linktree-link-sub">An island defense game made with Claude</span>
+              </div>
+            </a>
 
             <div className="linktree-divider" />
 
@@ -44,8 +88,15 @@ export default function LinkTree() {
               target="_blank"
               rel="noreferrer"
               className="linktree-link"
+              onMouseEnter={() => setHoveredSlug('github')}
+              onMouseLeave={() => setHoveredSlug(null)}
             >
-              <span className="linktree-link-text">GitHub</span>
+              {!reducedMotion && (
+                <LinkIcon3D type="github" hovered={hoveredSlug === 'github'} />
+              )}
+              <div className="linktree-link-content">
+                <span className="linktree-link-text">GitHub</span>
+              </div>
             </a>
 
             <a
@@ -53,25 +104,29 @@ export default function LinkTree() {
               target="_blank"
               rel="noreferrer"
               className="linktree-link"
+              onMouseEnter={() => setHoveredSlug('instagram')}
+              onMouseLeave={() => setHoveredSlug(null)}
             >
-              <span className="linktree-link-text">Instagram</span>
+              {!reducedMotion && (
+                <LinkIcon3D type="instagram" hovered={hoveredSlug === 'instagram'} />
+              )}
+              <div className="linktree-link-content">
+                <span className="linktree-link-text">Instagram</span>
+              </div>
             </a>
 
             <a
               href={`mailto:${profile.email}`}
               className="linktree-link"
+              onMouseEnter={() => setHoveredSlug('email')}
+              onMouseLeave={() => setHoveredSlug(null)}
             >
-              <span className="linktree-link-text">Email</span>
-            </a>
-
-            <div className="linktree-divider" />
-
-            <a
-              href={upiUrl}
-              className="linktree-link linktree-link--coffee"
-            >
-              <span className="linktree-link-text">{profile.buyMeCoffee.label}</span>
-              <span className="linktree-link-sub">Support my work via UPI</span>
+              {!reducedMotion && (
+                <LinkIcon3D type="email" hovered={hoveredSlug === 'email'} />
+              )}
+              <div className="linktree-link-content">
+                <span className="linktree-link-text">Email</span>
+              </div>
             </a>
           </div>
 
@@ -80,6 +135,12 @@ export default function LinkTree() {
           </footer>
         </div>
       </div>
+
+      {!reducedMotion && (
+        <Suspense fallback={null}>
+          <SceneCanvas />
+        </Suspense>
+      )}
     </>
   );
 }
