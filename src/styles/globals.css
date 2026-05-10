@@ -215,8 +215,8 @@ img {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 14px;
-  padding: 14px 20px;
+  gap: 18px;
+  padding: 16px 22px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--bg);
@@ -282,9 +282,16 @@ img {
 /* ── 3D Inline Icons ─────────────────────────────── */
 
 .link-icon-view {
-  width: 48px;
-  height: 48px;
+  width: 80px;
+  height: 80px;
   flex-shrink: 0;
+}
+
+@media (max-width: 420px) {
+  .link-icon-view {
+    width: 64px;
+    height: 64px;
+  }
 }
 
 .linktree-link-content {
