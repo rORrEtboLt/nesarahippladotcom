@@ -24,7 +24,7 @@ export default function LinkIcon3D({ type, hovered }) {
     <View className="link-icon-view">
       <ambientLight intensity={0.7} />
       <directionalLight position={[2, 3, 2]} intensity={1.2} />
-      <group scale={1.5}>
+      <group scale={7.2}>
         <Icon hovered={hovered} />
       </group>
     </View>
