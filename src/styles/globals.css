@@ -885,3 +885,94 @@ img {
   }
 }
 
+/* =====================================================
+   Enchantress Pages
+   ===================================================== */
+
+.enchantress-page {
+  max-width: 680px;
+  padding: 64px 0 96px;
+}
+
+.enchantress-page h1 {
+  font-size: clamp(28px, 5vw, 40px);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.enchantress-subtitle {
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin-bottom: 40px;
+}
+
+.enchantress-tagline {
+  font-size: 18px;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+}
+
+.enchantress-hero-text {
+  font-size: 20px;
+  line-height: 1.6;
+  color: var(--text);
+  margin-bottom: 48px;
+}
+
+.enchantress-page section {
+  margin-bottom: 40px;
+}
+
+.enchantress-page h2 {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+
+.enchantress-page h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 20px 0 8px;
+  color: var(--text);
+}
+
+.enchantress-page p {
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.enchantress-page a {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.enchantress-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+}
+
+.enchantress-features li {
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--text);
+  padding-left: 20px;
+  position: relative;
+}
+
+.enchantress-features li::before {
+  content: '\2022';
+  position: absolute;
+  left: 0;
+  color: var(--text-secondary);
+}
+

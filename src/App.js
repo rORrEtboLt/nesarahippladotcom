@@ -8,6 +8,9 @@ import LinkTree from './pages/LinkTree';
 import WorkDetail from './pages/WorkDetail';
 import About from './pages/About';
 import AdminUpload from './pages/AdminUpload';
+import EnchantressMarketing from './pages/EnchantressMarketing';
+import EnchantressSupport from './pages/EnchantressSupport';
+import EnchantressPrivacy from './pages/EnchantressPrivacy';
 
 function getBasename() {
   const url = process.env.PUBLIC_URL || '';
@@ -28,6 +31,9 @@ function App() {
           <Route path="/work/:slug" element={<WorkDetail />} />
           <Route path="/about" element={<About />} />
           <Route path="/admin" element={<AdminUpload />} />
+          <Route path="/enchantress" element={<EnchantressMarketing />} />
+          <Route path="/enchantress/support" element={<EnchantressSupport />} />
+          <Route path="/enchantress/privacy" element={<EnchantressPrivacy />} />
           <Route path="*" element={<LinkTree />} />
         </Routes>
       </Router>
