@@ -4,7 +4,7 @@ import { HelmetProvider } from 'react-helmet-async';
 
 import './styles/globals.css';
 
-import LinkTree from './pages/LinkTree';
+import Home from './pages/Home';
 import WorkDetail from './pages/WorkDetail';
 import About from './pages/About';
 import AdminUpload from './pages/AdminUpload';
@@ -27,14 +27,14 @@ function App() {
     <HelmetProvider>
       <Router basename={getBasename()}>
         <Routes>
-          <Route path="/" element={<LinkTree />} />
+          <Route path="/" element={<Home />} />
           <Route path="/work/:slug" element={<WorkDetail />} />
           <Route path="/about" element={<About />} />
           <Route path="/admin" element={<AdminUpload />} />
           <Route path="/enchantress" element={<EnchantressMarketing />} />
           <Route path="/enchantress/support" element={<EnchantressSupport />} />
           <Route path="/enchantress/privacy" element={<EnchantressPrivacy />} />
-          <Route path="*" element={<LinkTree />} />
+          <Route path="*" element={<Home />} />
         </Routes>
       </Router>
     </HelmetProvider>

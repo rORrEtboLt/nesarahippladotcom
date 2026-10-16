@@ -1,0 +1,97 @@
+{
+  "now": {
+    "name": "AnyGarbs",
+    "pitch": "AI-driven robot swarms that turn any garbage into graded raw materials.",
+    "detail": "Scout drones map every pile. Hauler bots collect it. Sorter bots split it by material using vision, near-infrared and X-ray fluorescence. Container-sized refiners turn each stream into a product a factory will buy, such as compost, biogas, PET flake, copper cathode or rare-earth oxides, and a trading agent sells it. Garbage goes in and feedstock comes out.",
+    "links": [
+      { "label": "anygarbs.com", "url": "https://anygarbs.com" },
+      { "label": "Source", "url": "https://github.com/rORrEtboLt/anygarbs" }
+    ],
+    "tags": ["Robotics", "Climate", "AI agents", "Hardware"]
+  },
+  "shipped": [
+    {
+      "name": "designElectronics",
+      "kind": "Developer tool",
+      "pitch": "Open-source electronics CAD for desktop and phone: breadboard, schematic, PCB layout and a simulator.",
+      "highlights": [
+        "A* grid autorouter with vias and clearances, plus DRC",
+        "Exports fab-ready Gerber files",
+        "Designs are single offline .dez files that embed every part they use"
+      ],
+      "stack": ["C++17", "SDL3"],
+      "links": [
+        { "label": "Docs", "url": "https://rorretbolt.github.io/designElectronics/" },
+        { "label": "Source", "url": "https://github.com/rORrEtboLt/designElectronics" }
+      ]
+    },
+    {
+      "name": "MyFiles",
+      "kind": "Mobile + backend",
+      "pitch": "A phone index for paper documents. Scan what goes into each envelope, then search the text to find which envelope holds the paper.",
+      "highlights": [
+        "Document camera with edge detection and on-device OCR",
+        "Offline-first SQLite FTS5 search, with records that merge on sync instead of duplicating",
+        "Printable QR labels and a self-hosted sync server"
+      ],
+      "stack": ["C", "SDL3", "SQLite", "Node", "Hapi", "PostgreSQL"],
+      "links": [
+        { "label": "Docs", "url": "https://rorretbolt.github.io/MyFiles/" },
+        { "label": "Source", "url": "https://github.com/rORrEtboLt/MyFiles" }
+      ]
+    },
+    {
+      "name": "RoastIQ",
+      "kind": "IoT / hardware",
+      "pitch": "Open-source coffee roasting telemetry. An ESP32 streams bean and drum temperatures over WebSocket into Artisan.",
+      "highlights": [
+        "Built for roasting the coffee from our own estate",
+        "Bridge and docs are open source"
+      ],
+      "stack": ["ESP32", "TypeScript", "WebSocket"],
+      "links": [
+        { "label": "Docs", "url": "https://rorretbolt.github.io/roastiq.github.io/" },
+        { "label": "Bridge", "url": "https://github.com/rORrEtboLt/esp32_temp" }
+      ]
+    },
+    {
+      "name": "Enchantress",
+      "kind": "Mobile game",
+      "pitch": "A dice lane-defense game based on Indian mythology. It's a premium game with no ads and no in-app purchases.",
+      "highlights": [
+        "11 summonable units and 18 enemy types",
+        "Written in C"
+      ],
+      "stack": ["C", "iOS"],
+      "links": [{ "label": "Game page", "url": "/enchantress", "internal": true }]
+    },
+    {
+      "name": "Adventures with Buster",
+      "kind": "Game",
+      "pitch": "A gentle companion game about my half-indie, half-dachshund dog. Every character and tree is procedural geometry built in C++.",
+      "highlights": ["Runs in the browser on desktop and on phones"],
+      "stack": ["Godot 4", "C++ GDExtension"],
+      "links": [
+        { "label": "Play", "url": "https://rorretbolt.github.io/-do-naina-india-platformer/" },
+        { "label": "Source", "url": "https://github.com/rORrEtboLt/-do-naina-india-platformer" }
+      ]
+    },
+    {
+      "name": "Dweepa",
+      "kind": "Game",
+      "pitch": "An island-defense game built together with Claude.",
+      "highlights": ["Playable in the browser"],
+      "stack": ["TypeScript"],
+      "links": [
+        { "label": "Play", "url": "https://rorretbolt.github.io/dweepa/" },
+        { "label": "Source", "url": "https://github.com/rORrEtboLt/dweepa" }
+      ]
+    }
+  ],
+  "stack": [
+    { "area": "Systems", "items": ["C", "C++17", "SDL3", "GDExtension"] },
+    { "area": "Web & backend", "items": ["TypeScript", "Node", "Hapi", "PostgreSQL", "Astro", "React"] },
+    { "area": "Hardware", "items": ["ESP32", "Sensors", "PCB design"] },
+    { "area": "Mobile & games", "items": ["iOS", "Android", "Godot 4"] }
+  ]
+}
