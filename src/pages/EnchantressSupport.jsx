@@ -27,23 +27,11 @@ export default function EnchantressSupport() {
             <p className="enchantress-subtitle">Dice Lane Defense</p>
 
             <section>
-              <h2>Report a Bug</h2>
-              <p>
-                Found something broken? Open an issue on GitHub and include what device you're
-                playing on, what happened, and what you expected to happen.
-              </p>
-              <p>
-                <a href="https://github.com/rORrEtboLt/Maayavi/issues" target="_blank" rel="noreferrer">
-                  Open an issue on GitHub
-                </a>
-              </p>
-            </section>
-
-            <section>
               <h2>Contact</h2>
               <p>
-                For anything else, email me directly at{' '}
-                <a href={`mailto:${profile.email}`}>{profile.email}</a>.
+                Found a bug or have a question? Email me at{' '}
+                <a href={`mailto:${profile.email}?subject=Enchantress%20Support`}>{profile.email}</a>.
+                Include what device you're playing on, what happened, and what you expected.
                 I try to respond within a day or two.
               </p>
             </section>
