@@ -63,35 +63,22 @@ Everything a visitor sees is driven by a handful of small files:
 
 ## Deployment
 
-This repo is the **private source of truth**. Published output lives in
-the public repo **`rORrEtboLt/website`**, which GitHub Pages serves at
-**nesarahippla.com**.
-
-On every push to `master` here, the workflow
-`.github/workflows/deploy-to-website.yml`:
+GitHub Pages serves this repo at **nesarahippla.com**. On every push to
+`master`, `.github/workflows/deploy-pages.yml`:
 
 1. Installs deps and runs `npm run build:static`.
    - Builds via `react-scripts build`.
    - Copies output into `docs/`.
    - Strips sourcemaps.
    - Runs Prettier over all HTML + CSS so the published files are
-     human-readable and hand-editable.
-2. Checks out `rORrEtboLt/website` using a PAT secret.
-3. Backs up `CNAME`, wipes the repo (except `.git`), copies `docs/` in,
-   restores `CNAME`.
-4. Commits and pushes to `rORrEtboLt/website@master`.
+     human-readable.
+2. Uploads `docs/` as a Pages artifact and deploys it.
 
 ### One-time setup
 
-1. Create a **fine-grained personal access token** (or classic PAT) with
-   `Contents: read/write` permission on `rORrEtboLt/website`.
-2. In this repo, go to **Settings → Secrets and variables → Actions**
-   and add a new secret named `WEBSITE_DEPLOY_TOKEN` with that token's
-   value.
-3. Confirm `rORrEtboLt/website` has `CNAME` at its root containing
-   `nesarahippla.com` (the workflow preserves it across deploys).
-4. In the `website` repo, **Settings → Pages → Source:**
-   *Deploy from a branch* → `master` → `/` (root).
+1. **Settings → Pages → Source:** *GitHub Actions*.
+2. **Settings → Pages → Custom domain:** `nesarahippla.com`, with
+   *Enforce HTTPS* on.
 
 ### Running the build locally
 
@@ -105,7 +92,8 @@ always rebuilds from `src/` on master.
 
 ### Notes
 
-- `package.json` has `"homepage": "."` so asset paths are relative.
+- `package.json` has `"homepage": "/"` so asset paths are absolute and
+  nested routes like `/work/cottage` load correctly.
 - `App.js` derives the React Router `basename` from `PUBLIC_URL` at
   runtime, keeping deep links working under a subpath if needed.
 - Other static hosts (Vercel, Netlify, Cloudflare Pages) also work if

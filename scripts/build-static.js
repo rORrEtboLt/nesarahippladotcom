@@ -13,9 +13,9 @@
  *  5. Drop `.nojekyll` so GitHub Pages doesn't rewrite filenames beginning
  *     with an underscore, and a short `README.md` explaining the folder.
  *
- * The CI workflow at `.github/workflows/deploy-to-website.yml` runs this
- * on every push to master and then syncs the contents of `docs/` into the
- * public `rORrEtboLt/website` repo that serves nesarahippla.com.
+ * The CI workflow at `.github/workflows/deploy-pages.yml` runs this on
+ * every push to master and deploys `docs/` to GitHub Pages
+ * (nesarahippla.com).
  */
 const { execSync } = require('child_process');
 const fs = require('fs');
