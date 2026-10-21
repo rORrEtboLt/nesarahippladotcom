@@ -1,11 +1,9 @@
-import React, { lazy, Suspense, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import files from '../content/files';
 import Terminal from '../components/vscode/Terminal';
 import '../styles/vscode.css';
-
-const DinoGame = lazy(() => import('../components/vscode/DinoGame'));
 
 const ROOT = 'nesarahippla';
 const DEFAULT_FILE = 'README.md';
@@ -153,7 +151,8 @@ function FileIcon({ path }) {
   const type = files[path]?.type;
   if (type === 'image') return <span className="vs-icon vs-icon-img" aria-hidden="true">▣</span>;
   if (type === 'video') return <span className="vs-icon vs-icon-vid" aria-hidden="true">▶</span>;
-  if (type === 'game') return <span className="vs-icon vs-icon-js" aria-hidden="true">JS</span>;
+  if (type === 'app' && path.endsWith('.ts')) return <span className="vs-icon vs-icon-ts" aria-hidden="true">TS</span>;
+  if (type === 'app') return <span className="vs-icon vs-icon-wasm" aria-hidden="true">WA</span>;
   return <span className="vs-icon vs-icon-md" aria-hidden="true">M↓</span>;
 }
 
@@ -167,15 +166,43 @@ function ActivityIcon({ d, active, label }) {
   );
 }
 
+// Runs a build from public/apps/ in the editor. Big downloads wait for a click.
+function AppView({ path, file }) {
+  const [running, setRunning] = useState(!file.size);
+  const [reloads, setReloads] = useState(0);
+  const src = `${process.env.PUBLIC_URL}/${file.src}`;
+  return (
+    <div className="vs-app">
+      <div className="vs-app-bar">
+        <span className="vs-app-cmd">$ emrun {path}</span>
+        <span className="vs-app-stack">{file.stack.join(' · ')}</span>
+        <span className="vs-app-actions">
+          {running && <button onClick={() => setReloads((n) => n + 1)} title="Restart">⟳ restart</button>}
+          <a href={src} target="_blank" rel="noreferrer">fullscreen ↗</a>
+          <a href={file.repo} target="_blank" rel="noreferrer">source ↗</a>
+        </span>
+      </div>
+      {running ? (
+        <iframe
+          key={reloads}
+          className="vs-app-frame"
+          src={src}
+          title={path}
+          allow="autoplay; fullscreen; gamepad; clipboard-write"
+          allowFullScreen
+        />
+      ) : (
+        <button className="vs-app-run" onClick={() => setRunning(true)}>
+          ▶ Run {path.split('/').pop()} <small>{file.size}</small>
+        </button>
+      )}
+    </div>
+  );
+}
+
 function Editor({ path, open }) {
   const file = files[path];
-  if (file.type === 'game') {
-    return (
-      <Suspense fallback={null}>
-        <DinoGame />
-      </Suspense>
-    );
-  }
+  if (file.type === 'app') return <AppView key={path} path={path} file={file} />;
   if (file.type === 'image' || file.type === 'video') {
     return (
       <div className="vs-preview">
@@ -197,7 +224,7 @@ function Editor({ path, open }) {
   );
 }
 
-export default function Code() {
+export default function Home() {
   const [current, setCurrent] = useState(fileFromHash);
   const [tabs, setTabs] = useState(() => Array.from(new Set([DEFAULT_FILE, fileFromHash()])));
   const [openFolders, setOpenFolders] = useState({ now: true, projects: true, games: true });
@@ -232,7 +259,9 @@ export default function Code() {
   const file = files[current];
   const name = current.split('/').pop();
   const lineCount = file.type === 'md' ? file.content.replace(/\n$/, '').split('\n').length : 0;
-  const language = { md: 'Markdown', game: 'JavaScript', image: 'Image', video: 'Video' }[file.type];
+  const language = file.type === 'app'
+    ? (current.endsWith('.ts') ? 'TypeScript' : 'WebAssembly')
+    : { md: 'Markdown', image: 'Image', video: 'Video' }[file.type];
 
   const fileRow = (path, depth) => (
     <button
@@ -287,7 +316,6 @@ export default function Code() {
               {rootFiles.map((p) => fileRow(p, 0))}
 
               <div className="vs-sidebar-links">
-                <Link to="/">← apps</Link>
                 <a href="https://github.com/rORrEtboLt" target="_blank" rel="noreferrer">github ↗</a>
                 <a href="https://www.instagram.com/nesara.hippla/" target="_blank" rel="noreferrer">instagram ↗</a>
                 <a href="mailto:nesara.hippla@gmail.com">email</a>

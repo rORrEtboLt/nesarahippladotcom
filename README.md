@@ -25,11 +25,12 @@ npm run build      # production build
 
 ## Homepage apps
 
-The homepage is a desktop of small windows, each running one of my games or
-apps live in an `<iframe>`. The SDL3 repos (designElectronics, Enchantress /
-sdl3-games) are compiled to WebAssembly with Emscripten; Buster (Godot) and
-Dweepa (Vite) use their own web builds. The VS Code-style about page lives
-at `/code`.
+The homepage is a VS Code-style editor. My games and apps show up as files in
+its explorer (`games/enchantress.wasm`, `projects/designElectronics.wasm`, ...)
+and run inside the editor tab when opened, or via `play` in the terminal. The
+SDL3 repos (designElectronics, Enchantress / sdl3-games) are compiled to
+WebAssembly with Emscripten; Buster (Godot) and Dweepa (Vite) use their own
+web builds.
 
 ```bash
 source ~/emsdk/emsdk_env.sh   # Emscripten 5.0.7, needed for the SDL3 apps
@@ -38,8 +39,8 @@ npm run build:apps maayavi    # or just some of them
 ```
 
 `public/apps/` is git-ignored; CI runs `build:apps` on every deploy, so the
-site picks up the latest commit of each app repo. The window list (title,
-repo, autoplay, size) is in `src/content/apps.js`.
+site picks up the latest commit of each app repo. The editor entries are the
+`app(...)` files in `src/content/files.js`.
 
 ## Editing content
 

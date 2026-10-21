@@ -9,7 +9,7 @@
 #   npm run build:apps            # build everything
 #   npm run build:apps maayavi    # build only the named apps
 #
-# The window list itself lives in src/content/apps.js.
+# The editor tabs that run them are the `app` entries in src/content/files.js.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
