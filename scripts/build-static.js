@@ -45,11 +45,14 @@ function copyDir(src, dst) {
   }
 }
 
+// Skips docs/apps/: those are finished builds from other repos (see
+// scripts/build-apps.sh) and their minified HTML isn't ours to reformat.
 function walk(dir, match, out = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const p = path.join(dir, entry.name);
-    if (entry.isDirectory()) walk(p, match, out);
-    else if (match.test(entry.name)) out.push(p);
+    if (entry.isDirectory()) {
+      if (p !== path.join(DOCS_DIR, 'apps')) walk(p, match, out);
+    } else if (match.test(entry.name)) out.push(p);
   }
   return out;
 }
