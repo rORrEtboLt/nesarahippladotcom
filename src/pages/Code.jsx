@@ -197,7 +197,7 @@ function Editor({ path, open }) {
   );
 }
 
-export default function Home() {
+export default function Code() {
   const [current, setCurrent] = useState(fileFromHash);
   const [tabs, setTabs] = useState(() => Array.from(new Set([DEFAULT_FILE, fileFromHash()])));
   const [openFolders, setOpenFolders] = useState({ now: true, projects: true, games: true });
@@ -287,6 +287,7 @@ export default function Home() {
               {rootFiles.map((p) => fileRow(p, 0))}
 
               <div className="vs-sidebar-links">
+                <Link to="/">← apps</Link>
                 <a href="https://github.com/rORrEtboLt" target="_blank" rel="noreferrer">github ↗</a>
                 <a href="https://www.instagram.com/nesara.hippla/" target="_blank" rel="noreferrer">instagram ↗</a>
                 <a href="mailto:nesara.hippla@gmail.com">email</a>

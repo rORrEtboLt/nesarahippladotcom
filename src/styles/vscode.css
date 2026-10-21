@@ -1,4 +1,4 @@
-/* Home page: a VS Code window showing markdown files. Scoped under .vs. */
+/* /code: a VS Code window showing markdown files. Scoped under .vs. */
 
 .vs {
   --vs-bg: #1f1f1f;

@@ -23,3 +23,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .gstack/
+
+# WebAssembly apps built by scripts/build-apps.sh
+/public/apps
+/.apps-build

@@ -36,6 +36,7 @@ sort it by material, and turn it into raw material that factories buy.
 - [Adventures with Buster](projects/Buster.md) - a small game about my dog
 - [Dweepa](projects/Dweepa.md) - island defense game
 
+Most of these run in your browser, in windows on the [home page](/).
 Everything else is on [github.com/rORrEtboLt](https://github.com/rORrEtboLt).
 
 ## Away from the computer

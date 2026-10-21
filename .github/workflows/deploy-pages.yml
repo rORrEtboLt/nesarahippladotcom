@@ -27,6 +27,16 @@ jobs:
 
       - run: npm ci
 
+      # Games and apps for the homepage windows: SDL3 repos compiled with
+      # Emscripten, plus the other web builds, into public/apps/.
+      - uses: mymindstorm/setup-emsdk@v14
+        with:
+          version: 5.0.7
+          actions-cache-folder: emsdk-cache
+
+      - name: Build homepage apps
+        run: npm run build:apps
+
       - name: Build static site into docs/
         run: npm run build:static
         env:
