@@ -23,6 +23,24 @@ npm start          # dev server on http://localhost:3006
 npm run build      # production build
 ```
 
+## Homepage apps
+
+The homepage is a desktop of small windows, each running one of my games or
+apps live in an `<iframe>`. The SDL3 repos (designElectronics, Enchantress /
+sdl3-games) are compiled to WebAssembly with Emscripten; Buster (Godot) and
+Dweepa (Vite) use their own web builds. The VS Code-style about page lives
+at `/code`.
+
+```bash
+source ~/emsdk/emsdk_env.sh   # Emscripten 5.0.7, needed for the SDL3 apps
+npm run build:apps            # clone + build every app into public/apps/
+npm run build:apps maayavi    # or just some of them
+```
+
+`public/apps/` is git-ignored; CI runs `build:apps` on every deploy, so the
+site picks up the latest commit of each app repo. The window list (title,
+repo, autoplay, size) is in `src/content/apps.js`.
+
 ## Editing content
 
 Everything a visitor sees is driven by a handful of small files:
