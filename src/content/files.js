@@ -1,5 +1,5 @@
 // Files shown in the homepage "editor" and the terminal.
-// type: 'md' (content), 'image' | 'video' (src), 'game'.
+// type: 'md' (content), 'image' | 'video' (src), 'app'.
 // In markdown, `*.md` and media paths open in a tab, `/path` is a site route,
 // anything else is external. `![alt](path)` renders the media under the line.
 
@@ -8,6 +8,9 @@ const DE = 'https://rorretbolt.github.io/designElectronics/assets';
 const md = (content) => ({ type: 'md', content });
 const image = (src, caption) => ({ type: 'image', src, caption });
 const video = (src, poster, caption) => ({ type: 'video', src, poster, caption });
+// A WebAssembly build from scripts/build-apps.sh, run in an <iframe>.
+// `size` is shown on a Run button instead of starting automatically.
+const app = (src, repo, stack, size) => ({ type: 'app', src, repo, stack, size });
 
 const files = {
   'README.md': md(`# Nesara Hippla
@@ -18,7 +21,7 @@ Chikmaglur, Karnataka.
 I write mostly C, C++ and TypeScript. I like software that works
 offline, runs on cheap hardware, and that I can fix myself.
 
-> psst: there's a terminal down there. try \`help\`, or \`dino\`.
+> psst: there's a terminal down there. try \`help\`, or \`play\`.
 
 ## Now
 
@@ -36,8 +39,16 @@ sort it by material, and turn it into raw material that factories buy.
 - [Adventures with Buster](projects/Buster.md) - a small game about my dog
 - [Dweepa](projects/Dweepa.md) - island defense game
 
-Most of these run in your browser, in windows on the [home page](/).
 Everything else is on [github.com/rORrEtboLt](https://github.com/rORrEtboLt).
+
+## Play
+
+These run right here in the editor, compiled to WebAssembly:
+
+- [enchantress.wasm](games/enchantress.wasm) - C and SDL3, built with Emscripten
+- [buster.wasm](games/buster.wasm) - Godot 4 and C++
+- [dweepa.ts](games/dweepa.ts) - TypeScript and canvas
+- [designElectronics.wasm](projects/designElectronics.wasm) - C++ and SDL3, built with Emscripten
 
 ## Away from the computer
 
@@ -99,6 +110,7 @@ export Gerbers.
 Stack: \`C++17\` \`SDL3\`
 
 - [docs](https://rorretbolt.github.io/designElectronics/)
+- run it here: [designElectronics.wasm](designElectronics.wasm)
 - [source](https://github.com/rORrEtboLt/designElectronics)
 `),
 
@@ -144,6 +156,7 @@ hold off the waves. Characters from Indian mythology.
 - Written in C
 
 - [game page](/enchantress)
+- play it here: [enchantress.wasm](../games/enchantress.wasm)
 `),
 
   'projects/Buster.md': md(`# Adventures with Buster
@@ -156,9 +169,8 @@ no art assets.
 
 Stack: \`Godot 4\` \`C++ GDExtension\`
 
-- [play in browser](https://rorretbolt.github.io/-do-naina-india-platformer/)
+- play it here: [buster.wasm](../games/buster.wasm)
 - [source](https://github.com/rORrEtboLt/-do-naina-india-platformer)
-- or run [games/dino.js](games/dino.js) and help him jump over things
 `),
 
   'projects/Dweepa.md': md(`# Dweepa
@@ -167,11 +179,14 @@ Island defense game I built together with Claude.
 
 ![Dweepa title screen](media/dweepa.webp)
 
-- [play in browser](https://rorretbolt.github.io/dweepa/)
+- play it here: [dweepa.ts](../games/dweepa.ts)
 - [source](https://github.com/rORrEtboLt/dweepa)
 `),
 
-  'games/dino.js': { type: 'game' },
+  'games/enchantress.wasm': app('apps/maayavi/index.html', 'https://github.com/rORrEtboLt/sdl3-games', ['C', 'SDL3', 'Emscripten']),
+  'games/buster.wasm': app('apps/buster/index.html', 'https://github.com/rORrEtboLt/-do-naina-india-platformer', ['C++', 'Godot 4'], '43 MB'),
+  'games/dweepa.ts': app('apps/dweepa/index.html', 'https://github.com/rORrEtboLt/dweepa', ['TypeScript', 'Canvas']),
+  'projects/designElectronics.wasm': app('apps/designelectronics/index.html#example=4&sim=1', 'https://github.com/rORrEtboLt/designElectronics', ['C++17', 'SDL3', 'Emscripten']),
 
   'media/gallery.md': md(`# media/
 

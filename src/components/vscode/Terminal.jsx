@@ -7,6 +7,7 @@ const PATHS = Object.keys(files);
 
 const isDir = (p) => p === '' || PATHS.some((f) => f.startsWith(`${p}/`));
 const isFile = (p) => files[p] !== undefined;
+const APPS = PATHS.filter((p) => files[p].type === 'app');
 
 function resolve(cwd, arg = '') {
   if (arg === '~' || arg === '/' || arg === '~/') return '';
@@ -47,7 +48,7 @@ const COMMANDS = {
   projects: 'things I have made',
   contact: 'how to reach me',
   github: 'open my GitHub',
-  dino: 'play a game',
+  play: 'run a game in the editor',
   coffee: 'brew a cup',
   'sudo hire-me': 'you know what to do',
   clear: 'clear the terminal',
@@ -83,7 +84,7 @@ export default function Terminal({ open }) {
   useEffect(() => {
     print(
       <span className="t-dim">Last login: {new Date().toDateString()} on ttys001</span>,
-      <span>Welcome to nesara's shell. Type <Cmd c="help" /> or try <Cmd c="neofetch" /> <Cmd c="ls" /> <Cmd c="dino" /> <Cmd c="sudo hire-me" /></span>
+      <span>Welcome to nesara's shell. Type <Cmd c="help" /> or try <Cmd c="neofetch" /> <Cmd c="ls" /> <Cmd c="play" /> <Cmd c="sudo hire-me" /></span>
     );
     return () => setLines([]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -220,11 +221,20 @@ export default function Terminal({ open }) {
       case 'github':
         window.open(GITHUB, '_blank', 'noopener');
         return print(<span className="t-dim">opening {GITHUB}</span>);
-      case 'dino':
       case 'play':
       case 'game':
-        open('games/dino.js');
-        return print(<span className="t-dim">starting games/dino.js ... press space to jump</span>);
+      case 'emrun': {
+        const name = (arg || '').toLowerCase().replace(/^.*\//, '').replace(/\.\w+$/, '');
+        const target = name && APPS.find((p) => p.toLowerCase().split('/').pop().startsWith(name));
+        if (!target) {
+          return print(
+            name ? `${cmd}: ${arg}: no such game` : 'usage: play <name>',
+            <span>{APPS.map((p) => <span key={p}><Cmd c={`play ${p.split('/').pop().replace(/\.\w+$/, '')}`} />{' '}</span>)}</span>
+          );
+        }
+        open(target);
+        return print(<span className="t-dim">running {target} ...</span>);
+      }
       case 'coffee':
       case 'brew':
         return print(
@@ -255,7 +265,7 @@ export default function Terminal({ open }) {
         return print('man pages are for real computers. try "help"');
       case 'exit':
       case 'logout':
-        return print(<span>there is no exit. there is a <Cmd c="dino" /> game though.</span>);
+        return print(<span>there is no exit. there are <Cmd c="play" /> games though.</span>);
       case 'clear':
         return setLines([]);
       default:

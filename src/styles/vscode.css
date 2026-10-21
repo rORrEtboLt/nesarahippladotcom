@@ -1,4 +1,4 @@
-/* /code: a VS Code window showing markdown files. Scoped under .vs. */
+/* Home page: a VS Code window showing markdown files. Scoped under .vs. */
 
 .vs {
   --vs-bg: #1f1f1f;
@@ -94,7 +94,8 @@ body:has(.vs) { background: #1f1f1f; }
 .vs-icon-md { color: #519aba; }
 .vs-icon-img { color: #a074c4; font-size: 12px; }
 .vs-icon-vid { color: #f14c4c; font-size: 9px; }
-.vs-icon-js { color: #cbcb41; font-size: 9px; }
+.vs-icon-wasm { color: #a074c4; font-size: 9px; }
+.vs-icon-ts { color: #3178c6; font-size: 9px; }
 
 .vs-sidebar-links {
   margin-top: auto;
@@ -194,21 +195,34 @@ body:has(.vs) { background: #1f1f1f; }
 .vs-preview img, .vs-preview video { max-width: 100%; max-height: 70vh; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5); }
 .vs-preview-caption { margin: 0; color: var(--vs-muted); font-family: var(--vs-ui); font-size: 13px; }
 
-/* Game tab */
-.vs-game { padding: 16px 24px; }
-.vs-game-cmd { color: var(--vs-muted); margin-bottom: 6px; }
-.vs-game-note { margin: 6px 0; }
-.vs-game-canvas {
-  display: block;
-  width: 100%;
-  max-width: 900px;
-  height: 260px;
-  border: 1px solid var(--vs-border);
-  border-radius: 6px;
-  background: #1b1b1b;
-  touch-action: manipulation;
-  cursor: pointer;
+/* App tab: a WebAssembly build in an iframe */
+.vs-app { height: 100%; display: flex; flex-direction: column; }
+.vs-app-bar {
+  flex: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 16px;
+  padding: 6px 16px;
+  border-bottom: 1px solid var(--vs-border);
+  font-family: var(--vs-mono);
+  font-size: 12px;
+  color: var(--vs-muted);
 }
+.vs-app-cmd { color: var(--vs-text); }
+.vs-app-actions { margin-left: auto; display: flex; gap: 14px; }
+.vs-app-actions a, .vs .vs-app-actions button { color: #4fc1ff; text-decoration: none; font-family: inherit; font-size: inherit; }
+.vs-app-actions a:hover, .vs .vs-app-actions button:hover { text-decoration: underline; }
+.vs-app-frame { flex: 1; min-height: 0; width: 100%; border: 0; background: #000; }
+.vs .vs-app-run {
+  flex: 1;
+  font-family: var(--vs-mono);
+  font-size: 14px;
+  color: var(--vs-text);
+  background: #000;
+}
+.vs-app-run small { margin-left: 8px; color: var(--vs-muted); }
+.vs .vs-app-run:hover { color: #fff; }
 
 /* Bottom panel + terminal */
 .vs-panel { flex: none; border-top: 1px solid var(--vs-border); background: var(--vs-side); display: flex; flex-direction: column; }
@@ -296,5 +310,4 @@ body:has(.vs) { background: #1f1f1f; }
   .vs-panel.open { height: 42%; }
   .t-body { padding: 4px 12px 12px; font-size: 12px; }
   .t-input { font-size: 16px; }
-  .vs-game { padding: 12px; }
 }
